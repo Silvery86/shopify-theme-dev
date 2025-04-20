@@ -99,7 +99,7 @@
     "featured_collection_edeYEE": {
       "type": "featured-collection",
       "settings": {
-        "collection": "most-popular",
+        "collection": "desk-mat",
         "products_to_show": 6,
         "title": "<strong>Best Sellers</strong>",
         "heading_size": "h2",
