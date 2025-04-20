@@ -12,5 +12,24 @@
   "context": {
     "market": "united-states"
   },
-  "sections": {}
+  "sections": {
+    "main": {
+      "settings": {},
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        }
+      }
+    },
+    "related-products": {
+      "settings": {
+        "show_vendor": true,
+        "show_rating": true
+      },
+      "blocks": {}
+    }
+  }
 }
