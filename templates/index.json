@@ -160,6 +160,7 @@
         "row_f4DMTG": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/AE12A279-5096-4119-8070-CD5619C5CAE0_copy.jpg",
             "caption": "",
             "heading": "<strong>Super Thin iPhone Cases</strong>",
             "text": "<p>At just 0.35mm thin, you can protect you iPhone while keeping its sleek form intact.</p>",
@@ -250,7 +251,7 @@
     "featured_collection_nGBEi8": {
       "type": "featured-collection",
       "settings": {
-        "collection": "desk-mats",
+        "collection": "watches",
         "products_to_show": 4,
         "title": "<strong>New Arrivals</strong>",
         "heading_size": "h2",
@@ -327,7 +328,7 @@
       "type": "featured-collection",
       "custom_css": [],
       "settings": {
-        "collection": "most-popular",
+        "collection": "bags",
         "products_to_show": 10,
         "title": "<strong>All Products</strong>",
         "heading_size": "h2",
