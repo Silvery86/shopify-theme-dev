@@ -14,18 +14,23 @@
     {% for block in section.blocks %}
       {% assign collection = block.settings.collection %}
       {% if collection.size > 0 %}
+        {% assign collection = collections[block.settings.collection] %}
+        {% assign collection_title = block.settings.collection_title | default: collection.title %}
+        {% assign collection_subtitle = block.settings.collection_subtitle | default: collection.description %}        
         <div
           class="collection-block"
           style="display: inline-block; margin: 1rem; text-align: {{ section.settings.text_alignment }};"
+          {{ block.shopify_attributes }}
         >
           <img
             src="{{ collection.image | image_url: width: image_width, crop: 'center' }}"
             width="{{ image_width }}"
             height="{{ image_width }}"
-            alt="{{ collection.title }}"
+            alt="{{ collection_title }}"
             style="border-radius: {{ section.settings.image_border_radius }}px;"
           >
-          <h2>{{ collection.title }}</h2>
+          <h2>{{ collection_title }}</h2>
+          <p>{{ collection_subtitle }}</p>
         </div>
       {% endif %}
     {% endfor %}
@@ -37,6 +42,10 @@
   "name": "Collections Showcase",
   "class": "collections-showcase",
   "settings": [
+    {
+      "type": "header",
+      "content": "Text Settings"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -70,6 +79,10 @@
       ]
     },
     {
+      "type": "header",
+      "content": "Collection Settings"
+    },
+    {
       "type": "select",
       "id": "image_size",
       "label": "Collection Image Size",
@@ -99,6 +112,19 @@
           "type": "collection",
           "id": "collection",
           "label": "Select Collection"
+          
+        },
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Collection Title",
+          "placeholder": "Custom Collection Title",
+        },
+        {
+          "type": "text",
+          "id": "collection_subtitle",
+          "label": "Collection Subtitle",
+          "placeholder": "Custom Collection Subtitle",
         }
       ],
       "limit": 5
@@ -111,3 +137,10 @@
   ]
 }
 {% endschema %}
+{% stylesheet %}
+.collection-tabs {
+  display: flex;  
+  align-items: start;
+  justify-content: center;
+}
+{% endstylesheet %}
