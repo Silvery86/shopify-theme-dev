@@ -1,0 +1,121 @@
+{% assign collection = collections[section.settings.collection] %}
+{% assign collection_title = section.settings.collection_title | default: collection.title %}
+{% assign collection_subtitle = section.settings.collection_subtitle | default: collection.description %}
+{% assign products_limit = section.settings.products_to_show | default: 12 %}
+{% assign products_per_row = section.settings.products_per_row | default: 4 %}
+
+{% if collection.products.size > 0 %}
+  <div style="display: flex; gap: 2rem;">
+    <!-- Left side (collection info) -->
+    <div style="width: 30%;">
+      {% if collection.image %}
+        <img 
+            src="{{ collection.image | image_url: width: 500 }}" 
+            alt="{{ collection.title }}" 
+            width="500px"
+            height="500px"
+            style="width: 100%; border-radius: 8px;"
+        >
+      {% endif %}
+      <h2>{{ collection_title }}</h2>
+      <p>{{ collection_subtitle }}</p>
+    </div>
+
+    <!-- Right side (product grid) -->
+    <div style="width: 70%;">
+      {% assign sorted_products = collection.products %}
+
+      {% if section.settings.product_order == "discount-desc" %}
+        {% assign sorted_products = sorted_products | sort: "compare_at_price" %}
+      {% elsif section.settings.product_order == "date-desc" %}
+        {% assign sorted_products = sorted_products | sort: "published_at" | reverse %}
+      {% elsif section.settings.product_order == "best-selling" %}
+        {% assign sorted_products = sorted_products | sort: "best-selling" %}
+      {% endif %}
+
+      <div style="display: grid; gap: 1rem; grid-template-columns: repeat({{ products_per_row }}, 1fr);">
+        {% for product in sorted_products limit: products_limit %}
+          <div class="product-card" style="border: 1px solid #eee; padding: 1rem; text-align: center;">
+            <a href="{{ product.url }}">
+              <img 
+                src="{{ product.featured_image | image_url: width: 400 }}"
+                 alt="{{ product.title }}"
+                 width="400px"
+                    height="400px"
+                  style="width: 100%; max-height: 200px; object-fit: cover;"
+                >
+              <h3 style="margin-top: 0.5rem;">{{ product.title }}</h3>
+              <p style="margin: 0.25rem 0;">
+                {% if product.compare_at_price > product.price %}
+                  <span style="text-decoration: line-through; color: #999;">{{ product.compare_at_price | money }}</span>
+                  <span>{{ product.price | money }}</span>
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+              </p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% else %}
+  <p>No products found in this collection.</p>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Collection Showcase",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "collection_title",
+      "label": "Collection Title",      
+    },
+    {
+      "type": "text",
+      "id": "collection_subtitle",
+      "label": "Collection Subtitle",
+      "default": "Check out these products!"
+    },
+    {
+      "type": "select",
+      "id": "product_order",
+      "label": "Product Order",
+      "options": [
+        { "label": "Best Selling", "value": "best-selling" },
+        { "label": "Newest", "value": "date-desc" },
+        { "label": "Biggest Discount", "value": "discount-desc" }
+      ],
+      "default": "best-selling"
+    },
+    {
+        "type": "range",
+        "id": "products_to_show",
+        "label": "Number of products to show",
+        "min": 1,
+        "max": 50,
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "label": "Products per row",
+        "min": 1,
+        "max": 6,
+        "default": 4
+      }
+  ],
+  "presets": [
+    {
+      "name": "Collection Showcase"
+    }
+  ]
+}
+{% endschema %}
