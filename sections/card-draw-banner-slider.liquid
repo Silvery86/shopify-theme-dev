@@ -1,0 +1,231 @@
+
+<div class="card-draw__body">
+  <div class="card-draw__container">
+    <div class="card-draw__slide">
+      {% for block in section.blocks %}
+        <div class="card-draw__item" style="background-image: url({{ block.settings.banner_image | img_url: 'original'  }});">
+          <div class="card-draw__content">
+            <div class="card-draw__name">{{ block.settings.banner_name }}</div>
+            <div class="card-draw__text">{{ block.settings.subtitle_text }}</div>
+            <button>See More</button>
+          </div>
+        </div>
+             
+      {% endfor %}
+    </div>
+    <div class="card-draw__button">
+      <button class="card-draw__prev">
+        prev
+      </button>
+      <button class="card-draw__next">
+        next
+      </button>
+    </div>
+  </div>
+</div>
+
+
+{% stylesheet %} 
+  .card-draw__body {
+    background: #ccc6c6;    
+   overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+  }
+
+  .card-draw__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    background: #f5f5f5;
+    /* box-shadow: 0 30px 50px #dbdbdb; */
+  }
+
+  .card-draw__container .card-draw__slide .card-draw__item {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #505050;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(1) {
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(2) {
+    left: 50%;
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(3) {
+    left: calc(50% + 220px);
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(4) {
+    left: calc(50% + 440px);
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(n + 5) {
+    left: calc(50% + 660px);
+    opacity: 0;
+  }
+
+  .card-draw__item .card-draw__content {
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    width: 300px;
+    text-align: left;
+    color: #eee;
+    transform: translate(0, -50%);
+    font-family: system-ui;
+    display: none;
+  }
+
+  .card-draw__slide .card-draw__item:nth-child(1) .card-draw__content {
+    display: block;
+  }
+
+  .card-draw__content .card-draw__name {
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0;
+    animation: animate 1s ease-in-out 1 forwards;
+  }
+
+  .card-draw__content .card-draw__text {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+  }
+
+  .card-draw__content button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+  }
+
+  @keyframes animate {
+    from {
+      opacity: 0;
+      transform: translate(0, 100px);
+      filter: blur(33px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0);
+      filter: blur(0);
+    }
+  }
+
+  .card-draw__button {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .card-draw__button button {
+    width: 40px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border: 1px solid #000;
+    transition: 0.3s;
+  }
+
+  .card-draw__button button:hover {
+    background: #ababab;
+    color: #fff;
+  }
+{% endstylesheet %}
+
+<script>
+  let next = document.querySelector('.card-draw__next');
+  let prev = document.querySelector('.card-draw__prev');
+
+  next.addEventListener('click', function () {
+    let items = document.querySelectorAll('.card-draw__item');
+    document.querySelector('.card-draw__slide').appendChild(items[0]);
+  });
+
+  prev.addEventListener('click', function () {
+    let items = document.querySelectorAll('.card-draw__item');
+    document.querySelector('.card-draw__slide').prepend(items[items.length - 1]);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Card Draw Banner Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "slider_header",
+      "label": "Slider Header"
+    },
+    {
+      "type": "text",
+      "id": "slider_text",
+      "label": "Slider Text"
+    }    
+  ],
+  "blocks": [
+    {
+      "type": "banner",        
+      "name": "Feature Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_name",
+          "label": "Banner Name",
+          "default": "Banner Name"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_text",
+          "label": "Subtitle Text",
+          "default": "Subtitle Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card Draw Banner Slider",
+      "settings": {
+        "slider_header": "Card Draw Banner Slider",
+        "slider_text": "Card Draw Banner Slider"
+      },
+    }
+  ]
+}
+{% endschema %}
