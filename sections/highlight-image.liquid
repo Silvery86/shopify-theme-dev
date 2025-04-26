@@ -1,0 +1,86 @@
+{% stylesheet %}
+  .highlight-image_text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .highlight-image_header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .highlight-image_link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    border: 1px solid black;
+  }
+  .highlight-image_link {
+    padding: 1rem;
+    text-decoration: none;
+  }  
+{% endstylesheet %}
+<div class="highlight-image_text-container">
+  <h2 class="highlight-image_header">{{ section.settings.highlight_header }}</h2>
+  <p class="highlight-image_text">{{ section.settings.highlight_text }}</p>
+</div>
+{% if section.settings.highlight_image != blank %}
+  {{
+    section.settings.highlight_image
+    | image_url: width: 1000, height: 500
+    | image_tag: class: 'highlight-image_image'
+  }}
+{% else %}
+  {{ 'hero-apparel-1' | placeholder_svg_tag: 'highlight-image_image' }}
+{% endif %}
+
+{% if section.settings.highlight_link != blank %}
+  <div class="highlight-image_link-container">
+    <a href="{{ section.settings.highlight_link }}" class="button">{{ section.settings.highlight_link_text }}</a>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Highlight Image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "highlight_header",
+      "label": "Highlight Header"
+    },
+    {
+      "type": "text",
+      "id": "highlight_text",
+      "label": "Highlight Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "highlight_image",
+      "label": "Highlight Image"
+    },
+    {
+      "type": "text",
+      "id": "highlight_link_text",
+      "label": "Highlight Link Text"
+    },
+    {
+      "type": "url",
+      "id": "highlight_link",
+      "label": "Highlight Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Highlight Image",
+      "settings": {
+        "highlight_header": "Highlight Header",
+        "highlight_text": "Highlight Text",
+        "highlight_image": "",
+        "highlight_link_text": "Learn More",
+        "highlight_link": "/"
+      }
+    }
+  ]
+}
+{% endschema %}
