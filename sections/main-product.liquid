@@ -85,7 +85,7 @@
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-          {%- for block in section.blocks -%}
+          {%- for block in section.blocks -%}            
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -659,7 +659,8 @@
                   {%- endif -%}
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
-                {% render 'icon-with-text', block: block %}
+              {% when 'product_rating' %}
+                {% render 'product-rating', block: block %}                
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2072,6 +2073,10 @@
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         }
       ]
+    },
+    {
+      "type": "product_rating",
+      "name": "Product Rating Stars"
     }
   ],
   "settings": [
