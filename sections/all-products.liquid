@@ -1,0 +1,46 @@
+{{ 'all-products.css' |  asset_url |  stylesheet_tag }}
+
+{% assign remaining_products = '' %}
+{% for product in collections.all.products offset: section.settings.products_per_row %}
+  {% assign remaining_products = remaining_products | append: product.handle %}
+  {% unless forloop.last %}
+    {% assign remaining_products = remaining_products | append: ',' %}
+  {% endunless %}
+{% endfor %}
+
+<div class="page-width">
+  <all-products
+    data-remaining-products="{{ remaining_products }}"
+    data-products-per-row="{{ section.settings.products_per_row }}"
+  >
+    <div
+      class="grid"
+      style="--item-per-row: {{ section.settings.products_per_row }}"
+    >
+      {% for product in collections.all.products limit: section.settings.products_per_row %}
+        {% render 'card-product', card_product: product %}
+      {% endfor %}
+    </div>
+    <button class="button">Load More</button>
+  </all-products>
+</div>
+
+<script src="{{ 'all-products.js' |  asset_url }}" async></script>
+
+{% schema %}
+{
+  "name": "All Products",
+  "settings": [
+    {
+      "type": "number",
+      "id": "products_per_row",
+      "label": "Product Per Row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Products"
+    }
+  ]
+}
+{% endschema %}
