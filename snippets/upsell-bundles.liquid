@@ -1,0 +1,100 @@
+{% if related_type == "vendor" %}
+  {% assign related_products = collections.all.products | where: "vendor", product.vendor %}
+{% elsif product.collections.size > 0 %}
+  {% assign related_products = product.collections.first.products %}
+{% endif %}
+
+{% if related_products %}
+<div id="upsell-bundles__container" style="display: none;">
+  {% for related_product in related_products limit: 10 %}
+    {% unless related_product.id == product.id %}
+    <div class="product-card" data-product-id="{{ related_product.variants.first.id }}">
+
+      {% if related_product.featured_image %}
+        <a href="{{ related_product.url }}">
+          <img src="{{ related_product.featured_image | img_url: 'medium' }}" 
+               alt="{{ related_product.title | escape }}"
+               width="150" height="150">
+        </a>
+      {% endif %}
+
+      <div class="product-card__content">
+        <h3>{{ related_product.title }}</h3>
+        <button class="product-card__button button" data-variant-id="{{ related_product.variants.first.id }}">
+          Add to Cart - {{ related_product.price | money }}
+        </button>
+      </div>
+    </div>
+    {% endunless %}
+  {% endfor %}
+</div>
+
+<div class="upsell-bundles">
+  <h2>Frequently Bought Together</h2>
+  <div class="grid" id="random-related-output"></div>
+  <button id="add-all-related-to-cart" class="add-all-btn button">Add All to Cart</button>
+</div>
+{% endif %}
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .product-card__content {
+    flex: 1;
+    padding-left: 1rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hiddenContainer = document.querySelector('#upsell-bundles__container');
+    if (!hiddenContainer) return;
+
+    const allProducts = Array.from(hiddenContainer.querySelectorAll('.product-card'));
+    const shuffled = allProducts.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    const outputContainer = document.getElementById('random-related-output');
+    shuffled.forEach(card => {
+      outputContainer.appendChild(card.cloneNode(true));
+    });
+
+    // Single product add-to-cart
+    outputContainer.querySelectorAll('.product-card__button').forEach(button => {
+      button.addEventListener('click', () => {
+        const variantId = button.dataset.variantId;
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+          .then(res => res.json())
+          .then(() => location.reload())
+          .catch(() => console.log('Failed to add product to cart.'));
+      });
+    });
+
+    // Add all products to cart
+    document.getElementById('add-all-related-to-cart').addEventListener('click', () => {
+      const items = Array.from(outputContainer.querySelectorAll('.product-card')).map(card => ({
+        id: card.dataset.productId,
+        quantity: 1
+      }));
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items })
+      })
+        .then(res => res.json())
+        .then(() => location.reload())
+        .catch(() => console.log('Failed to add products to cart.'));
+    });
+
+    hiddenContainer.remove();
+  });
+</script>
