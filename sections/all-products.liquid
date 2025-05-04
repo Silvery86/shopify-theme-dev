@@ -1,23 +1,47 @@
 {{ 'all-products.css' |  asset_url |  stylesheet_tag }}
 
 {% assign remaining_products = '' %}
-{% for product in collections.all.products offset: section.settings.products_per_row %}
+{% assign sorted_products = collections.all.products %}
+
+{%- case section.settings.product_sort_by -%}
+  {%- when 'best_selling' -%}
+    {%- assign sorted_products = sorted_products | sort: 'sales' %}  {# Note: Sales data needs to be available or tracked in metafields #}
+  {%- when 'newest' -%}
+    {%- assign sorted_products = sorted_products | sort: 'created_at' %}  
+  {%- when 'sale_percent' -%}
+    {%- assign sorted_products = sorted_products | sort: 'on_sale' %}  {# Assumes products have an 'on_sale' metafield or indicator #}
+  {%- when 'sold_number' -%}
+    {%- assign sorted_products = sorted_products | sort: 'sold_number' %}  {# Requires tracking number of sold items #}
+  {%- when 'price_low_to_high' -%}
+    {%- assign sorted_products = sorted_products | sort: 'price' %}  
+  {%- when 'price_high_to_low' -%}
+    {%- assign sorted_products = sorted_products | sort: 'price' | reverse %}
+{%- endcase -%}
+
+
+{% for product in sorted_products offset: section.settings.products_per_row %}
   {% assign remaining_products = remaining_products | append: product.handle %}
   {% unless forloop.last %}
     {% assign remaining_products = remaining_products | append: ',' %}
   {% endunless %}
 {% endfor %}
 
+
+
 <div class="page-width">
+  <div style="text-align: {{ section.settings.text_alignment }};">
+    <h2>{{ section.settings.all-product-header }}</h2>
+    <p>{{ section.settings.all-product-subtitle }}</p>
+  </div> 
   <all-products
     data-remaining-products="{{ remaining_products }}"
     data-products-per-row="{{ section.settings.products_per_row }}"
-  >
+  >  
     <div
       class="grid"
       style="--item-per-row: {{ section.settings.products_per_row }}"
     >
-      {% for product in collections.all.products limit: section.settings.products_per_row %}
+      {% for product in sorted_products limit: section.settings.products_per_row %}
         {% render 'card-product', card_product: product %}
       {% endfor %}
     </div>
@@ -32,10 +56,82 @@
   "name": "All Products",
   "settings": [
     {
+      "type": "header",
+      "content": "All Product Settings"
+    },
+    {
+      "type": "text",
+      "id" : "all-product-header",
+      "label" : "Heading Text"
+    },
+    {
+      "type": "richtext",
+      "id" : "all-product-subtitle",
+      "label" : "Subtitle Text"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Products Settings"
+    },
+    {
       "type": "number",
       "id": "products_per_row",
-      "label": "Product Per Row"
+      "label": "Product Per Row",
+      "default": 4
+    },
+    {
+  "type": "select",
+  "id": "product_sort_by",
+  "label": "Sort Products By",
+  "options": [
+    {
+      "value": "best_selling",
+      "label": "Best Selling"
+    },
+    {
+      "value": "newest",
+      "label": "Newest"
+    },
+    {
+      "value": "sale_percent",
+      "label": "Sale Percent"
+    },
+    {
+      "value": "sold_number",
+      "label": "Sold Number"
+    },
+    {
+      "value": "price_low_to_high",
+      "label": "Price, Low to High"
+    },
+    {
+      "value": "price_high_to_low",
+      "label": "Price, High to Low"
     }
+  ],
+  "default": "price_low_to_high"
+}
+
   ],
   "presets": [
     {
