@@ -9,6 +9,27 @@
  */
 {
   "sections": {
+    "card_draw_banner_slider_ghfRjX": {
+      "type": "card-draw-banner-slider",
+      "blocks": {
+        "banner_YLyxFA": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "shopify://shop_images/DSC08942.jpg",
+            "banner_name": "Elegent Phone Case",
+            "subtitle_text": "Design for you phone"
+          }
+        }
+      },
+      "block_order": [
+        "banner_YLyxFA"
+      ],
+      "name": "Card Draw Banner Slider",
+      "settings": {
+        "slider_header": "Card Draw Banner Slider",
+        "slider_text": "Card Draw Banner Slider"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -386,6 +407,7 @@
     }
   },
   "order": [
+    "card_draw_banner_slider_ghfRjX",
     "image_banner",
     "collection_list_cB39CM",
     "featured_collection_edeYEE",

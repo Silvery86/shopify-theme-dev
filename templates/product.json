@@ -23,10 +23,6 @@
           "type": "title",
           "settings": {}
         },
-        "product_rating_iV7Lda": {
-          "type": "product_rating",
-          "settings": {}
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -63,7 +59,6 @@
       "block_order": [
         "vendor",
         "title",
-        "product_rating_iV7Lda",
         "price",
         "variant_picker",
         "quantity_selector",
