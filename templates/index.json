@@ -65,6 +65,46 @@
         "slider_text": "Card Draw Banner Slider"
       }
     },
+    "collection_list_cB39CM": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_YVmND9": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "desk-mat"
+          }
+        },
+        "featured_collection_cymb7b": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bags"
+          }
+        },
+        "featured_collection_XBzX6c": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "watches"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_YVmND9",
+        "featured_collection_cymb7b",
+        "featured_collection_XBzX6c"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -111,46 +151,6 @@
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
-      }
-    },
-    "collection_list_cB39CM": {
-      "type": "collection-list",
-      "blocks": {
-        "featured_collection_YVmND9": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "desk-mat"
-          }
-        },
-        "featured_collection_cymb7b": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "bags"
-          }
-        },
-        "featured_collection_XBzX6c": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "watches"
-          }
-        }
-      },
-      "block_order": [
-        "featured_collection_YVmND9",
-        "featured_collection_cymb7b",
-        "featured_collection_XBzX6c"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "featured_collection_edeYEE": {
@@ -425,8 +425,8 @@
   },
   "order": [
     "card_draw_banner_slider_ghfRjX",
-    "image_banner",
     "collection_list_cB39CM",
+    "image_banner",
     "featured_collection_edeYEE",
     "rich_text_9iFnFg",
     "multirow_G9bdmV",
