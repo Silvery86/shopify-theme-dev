@@ -19,10 +19,27 @@
             "banner_name": "Elegent Phone Case",
             "subtitle_text": "Design for you phone"
           }
+        },
+        "banner_PR7WWe": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "shopify://shop_images/DSC08271.jpg",
+            "banner_name": "Ultimate Desk Mat",
+            "subtitle_text": "Subtitle Text"
+          }
+        },
+        "banner_FtDKtJ": {
+          "type": "banner",
+          "settings": {
+            "banner_name": "Banner Name",
+            "subtitle_text": "Subtitle Text"
+          }
         }
       },
       "block_order": [
-        "banner_YLyxFA"
+        "banner_YLyxFA",
+        "banner_PR7WWe",
+        "banner_FtDKtJ"
       ],
       "name": "Card Draw Banner Slider",
       "settings": {
