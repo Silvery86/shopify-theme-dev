@@ -17,7 +17,9 @@
           "settings": {
             "banner_image": "shopify://shop_images/DSC08942.jpg",
             "banner_name": "Elegent Phone Case",
-            "subtitle_text": "Design for you phone"
+            "subtitle_text": "Design for you phone",
+            "button_text": "View More",
+            "button_link": "shopify://collections"
           }
         },
         "banner_PR7WWe": {
@@ -25,7 +27,9 @@
           "settings": {
             "banner_image": "shopify://shop_images/DSC08271.jpg",
             "banner_name": "Ultimate Desk Mat",
-            "subtitle_text": ""
+            "subtitle_text": "",
+            "button_text": "View More",
+            "button_link": "/"
           }
         },
         "banner_FtDKtJ": {
@@ -33,7 +37,9 @@
           "settings": {
             "banner_image": "shopify://shop_images/DSC096641x1.jpg",
             "banner_name": "Banner Name",
-            "subtitle_text": "Subtitle Text"
+            "subtitle_text": "Subtitle Text",
+            "button_text": "View More",
+            "button_link": "/"
           }
         },
         "banner_6hDNYB": {
@@ -41,7 +47,9 @@
           "settings": {
             "banner_image": "shopify://shop_images/DSC027311x1.jpg",
             "banner_name": "Banner Name",
-            "subtitle_text": "Subtitle Text"
+            "subtitle_text": "Subtitle Text",
+            "button_text": "View More",
+            "button_link": "/"
           }
         }
       },
@@ -373,33 +381,15 @@
         "show_text_below": true
       }
     },
-    "featured_collection_WpPiQf": {
-      "type": "featured-collection",
-      "custom_css": [],
+    "all_products_jHY3Hx": {
+      "type": "all-products",
+      "name": "All Products",
       "settings": {
-        "collection": "bags",
-        "products_to_show": 10,
-        "title": "<strong>All Products</strong>",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 5,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "all-product-header": "All Products",
+        "all-product-subtitle": "<p>View our <strong>elegent </strong>products</p>",
+        "text_alignment": "center",
+        "products_per_row": 4,
+        "product_sort_by": "price_low_to_high"
       }
     },
     "rich_text_X38Qqb": {
@@ -443,7 +433,7 @@
     "newsletter_BKHWm4",
     "featured_collection_nGBEi8",
     "image_banner_k3xLXN",
-    "featured_collection_WpPiQf",
+    "all_products_jHY3Hx",
     "rich_text_X38Qqb"
   ]
 }
