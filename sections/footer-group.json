@@ -14,6 +14,20 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "link_list_Ft6B6n": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Silvery",
+            "menu": "main-menu"
+          }
+        },
+        "link_list_jnLGiT": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
+        },
         "link_list_gPrg9Q": {
           "type": "link_list",
           "settings": {
@@ -23,6 +37,8 @@
         }
       },
       "block_order": [
+        "link_list_Ft6B6n",
+        "link_list_jnLGiT",
         "link_list_gPrg9Q"
       ],
       "settings": {
