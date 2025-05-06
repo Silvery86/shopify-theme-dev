@@ -1,10 +1,11 @@
-<div class="card-draw__body">
+<div class="card-draw__body" id="{{ section.id }}">
   <div class="card-draw__container">
     <div class="card-draw__slide">
       {% for block in section.blocks %}
         <div
           class="card-draw__item"
           style="background-image: url({{ block.settings.banner_image | img_url: 'original'  }});"
+          {{ block.shopify_attributes }}
         >
           <div class="card-draw__content">
             <div class="card-draw__name">{{ block.settings.banner_name }}</div>
