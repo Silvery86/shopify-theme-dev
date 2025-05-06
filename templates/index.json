@@ -31,6 +31,15 @@
         "banner_FtDKtJ": {
           "type": "banner",
           "settings": {
+            "banner_image": "shopify://shop_images/DSC096641x1.jpg",
+            "banner_name": "Banner Name",
+            "subtitle_text": "Subtitle Text"
+          }
+        },
+        "banner_6hDNYB": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "shopify://shop_images/DSC027311x1.jpg",
             "banner_name": "Banner Name",
             "subtitle_text": "Subtitle Text"
           }
@@ -39,7 +48,8 @@
       "block_order": [
         "banner_YLyxFA",
         "banner_PR7WWe",
-        "banner_FtDKtJ"
+        "banner_FtDKtJ",
+        "banner_6hDNYB"
       ],
       "name": "Card Draw Banner Slider",
       "settings": {
