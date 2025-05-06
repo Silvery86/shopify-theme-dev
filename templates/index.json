@@ -381,33 +381,15 @@
         "show_text_below": true
       }
     },
-    "featured_collection_WpPiQf": {
-      "type": "featured-collection",
-      "custom_css": [],
+    "all_products_jHY3Hx": {
+      "type": "all-products",
+      "name": "All Products",
       "settings": {
-        "collection": "bags",
-        "products_to_show": 10,
-        "title": "<strong>All Products</strong>",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 5,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "all-product-header": "All Products",
+        "all-product-subtitle": "<p>View our <strong>elegent </strong>products</p>",
+        "text_alignment": "center",
+        "products_per_row": 4,
+        "product_sort_by": "price_low_to_high"
       }
     },
     "rich_text_X38Qqb": {
@@ -439,17 +421,6 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
-    },
-    "all_products_jHY3Hx": {
-      "type": "all-products",
-      "name": "All Products",
-      "settings": {
-        "all-product-header": "All Products",
-        "all-product-subtitle": "<p>View our <strong>elegent </strong>products</p>",
-        "text_alignment": "center",
-        "products_per_row": 4,
-        "product_sort_by": "price_low_to_high"
-      }
     }
   },
   "order": [
@@ -462,8 +433,7 @@
     "newsletter_BKHWm4",
     "featured_collection_nGBEi8",
     "image_banner_k3xLXN",
-    "featured_collection_WpPiQf",
-    "rich_text_X38Qqb",
-    "all_products_jHY3Hx"
+    "all_products_jHY3Hx",
+    "rich_text_X38Qqb"
   ]
 }
