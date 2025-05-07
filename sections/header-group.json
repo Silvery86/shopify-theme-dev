@@ -38,8 +38,8 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo_position": "middle-left",
-        "mobile_logo_position": "center",
+        "logo_position": "top-left",
+        "mobile_logo_position": "left",
         "menu": "categories",
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
