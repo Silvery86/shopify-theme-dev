@@ -1,0 +1,14 @@
+<h1>React Snippet</h1>
+<div id="root"></div>
+
+
+{% if template.name == "product" %}
+<div id="add-to-cart-button" data-variant-id="{{ product.first_available_variant.id }}"
+    data-product-title="{{ product.title }}"></div>
+{% endif %}
+
+<script type="module" src="{{ 'vite-client.js' |  asset_url }}" defer></script>
+<script type="module" src="{{ 'vite-counter.js' |  asset_url }}" defer></script>
+{% if template.name == "product" %}
+<script type="module" src="{{ 'vite-add-to-cart.js' |  asset_url }}" defer></script>
+{% endif %}

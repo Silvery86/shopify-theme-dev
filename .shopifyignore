@@ -1,0 +1,12 @@
+src/
+public/
+.gitignore
+eslint.config.js
+index.html
+package-lock.json
+package.lock
+README.md
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
