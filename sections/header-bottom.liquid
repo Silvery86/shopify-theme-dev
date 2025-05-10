@@ -1,18 +1,24 @@
+{{ 'header-bottom.css' | asset_url | stylesheet_tag }}
+
 <section class="header-bottom">
     <div class="header-bottom-wrapper">
         <div class="header-bottom__top">
             <div class="page-width">
                 <div class="header-bottom__container">
                     <div class="header-bottom__categories">
-                        Categories
+                        {{ linklists['categories'].title }}
                     </div>
                     <div class="header-bottom__nav">
                         <div class="nav__menu">
-                            <div class="nav__item">Best Seller</div>
-                            <div class="nav__item">Today's Deal</div>
-                            <div class="nav__item">New Arrivals</div>
-                            <div class="nav__item">Gift Cards</div>
-                            <div class="nav__item">Help Center</div>
+                            {% if section.settings.header-bottom-menu != blank %}
+                            {% for link in linklists[section.settings.header-bottom-menu].links %}
+                            <div class="nav__item">
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="nav__item">Please select a menu in the section settings.</div>
+                            {% endif %}
                         </div>
                         <div class="header-bottom__options">
                             <div class="header-bottom__language">
@@ -26,224 +32,94 @@
                 </div>
             </div>
         </div>
+        {% if template == "index" %}
         <div class="header-bottom__bottom">
             <div class="page-width">
                 <div class="header-bottom__hero-banner">
                     <div class="hero-banner__mega-menu">
-                        <div class="mega-menu__list">Computers & Accessories</div>
-                        <div class="mega-menu__list">Smartphones & Tablets</div>
-                        <div class="mega-menu__list">TV, Video & Audio</div>
-                        <div class="mega-menu__list">Speakers & Home Music</div>
-                        <div class="mega-menu__list">Cameras, Photo & Video</div>
-                        <div class="mega-menu__list">Printers & Ink</div>
-                        <div class="mega-menu__list">Charging Stations</div>
-                        <div class="mega-menu__list">Headphones</div>
-                        <div class="mega-menu__list">Wearable Electronics</div>
-                        <div class="mega-menu__list">Powerbanks</div>
-                        <div class="mega-menu__list">HDD/SSD Storage</div>
-                        <div class="mega-menu__list">HDD/SSD Storage</div>
+                        {% for link in linklists['categories'].links %}
+                        <div class="mega-menu__item">
+                            <div class="mega-menu__list">
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </div>
+                            {% if link.links != blank %}
+                            <div class="mega-menu__dropdown">
+                                <div class="mega-menu__columns">
+                                    {% for child in link.links %}
+                                    <div class="mega-menu__column">
+                                        <h4 class="mega-menu__column-title">{{ child.title }}</h4>
+                                        {% if child.links != blank %}
+                                        <ul class="mega-menu__column-list">
+                                            {% for grandchild in child.links %}
+                                            <li>
+                                                <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="mega-menu__promo">
+                                    <div class="mega-menu__promo-content">
+                                        <p class="mega-menu__promo-subtitle">Deal of the week</p>
+                                        <h3 class="mega-menu__promo-title">iPad Pro M1</h3>
+                                    </div>
+                                    <img src="{{ section.settings.mega_promo_image | image_url }}" alt="Promo Image"
+                                        width="252" height="195">
+
+                                    <a href="#" class="mega-menu__promo-button">Shop now</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                     <div class="hero-banner__container">
                         <div class="hero-banner__content">
-                            <p class="hero-banner__subtitle">Feel the real quality sound </p>
+                            <p class="hero-banner__subtitle">Feel the real quality sound
+                            </p>
                             <h2 class="hero-banner__heading">Headphones ProMax</h2>
                             <a href="#" class="hero-banner__button button">Shop now</a>
                         </div>
                         <div class="hero-banner__image">
-                            <img src="{{ section.settings.banner_image | image_url: width: 300 }}" alt="Hero Banner Image"
-                                width="full" height="300px" />
+                            <img src="{{ section.settings.banner_image | image_url: width: 300 }}"
+                                alt="Hero Banner Image" width="full" height="300px" />
                         </div>
                     </div>
                 </div>
             </div>
-           
+
         </div>
+        {% endif %}
     </div>
 </section>
 
-<style>
-    .header-bottom__top {
-        color: #FFFFFF;
-        background-color: #222934;
-
-    }
-
-    .header-bottom__container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        height: 50px;
-    }
-
-    .header-bottom__hero-banner {
-        display: flex;
-        flex-direction: row;
-        align-items: start;
-        justify-content: space-between;
-    }
-
-   
-
-    .hero-banner__mega-menu {
-        max-width: 306px;
-        display: flex;
-        justify-content: start;
-        padding: 12px 12px;
-    }
-
-    .header-bottom__options {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .header-bottom__language,
-    .header-bottom__currency {
-        padding: 0px 8px;
-    }
-
-    .header-bottom__nav,
-    .hero-banner__container {     
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .header-bottom__nav{
-        flex:1;
-    }
-    .nav__menu {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .nav__item {
-        padding: 12px 20px;
-    }
-    .header-bottom__categories {
-        width: 306px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #333D4C;
-        height: 50px;
-        padding: 12px;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;    
-  
-    }
-    .hero-banner__mega-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    padding: 12px;
-    width: 306px;
-    background-color: #c7cacd;
-    border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        max-height: 546px;
-    }
-
-.mega-menu__list {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;   
-  border-radius: 4px;
-  position: relative;
-  width: 100%;
-}
-
-.header-bottom__categories::before,
-.mega-menu__list::before {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url('{{ 'icon-check-mark.svg' | asset_url }}') no-repeat center;
-  background-size: contain;
-  margin-right: 8px;
-}
-
-.header-bottom__categories::after,
-.mega-menu__list::after {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url('{{ 'icon-arrow.svg' | asset_url }}') no-repeat center;
-  background-size: contain;
-}   
-
-    .header-bottom__hero-banner {
-        height: 546px;
-    }
-
-    .header-bottom__nav-menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-
-    }
-
-    .hero-banner__container {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        height: calc(546px - 20px);
-        background: linear-gradient(to right, #ACCBEE, #E7F0FD);
-        border-radius: 15px;
-        margin-top: 20px;
-        margin-left: 20px;
-    }
-
-    .hero-banner__content,
-    .hero-banner__image {
-        
-        flex: 1;
-        display: flex;
-        align-items: end;
-        max-width: 50%;
-    }
-
-    .hero-banner__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: start;
-        width: 100%;
-        padding: 40px;
-    }
-
-    .hero-banner__image img {
-      width: 100%;
-        height: calc(546px - 20px);
-        object-fit: cover;
-    }
-</style>
-
 {% schema %}
 {
-  "name": "Header Bottom",
-  "tag": "section",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "banner_image",
-      "label": "Banner Image"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Header Bottom"
-    }
-  ]
+"name": "Header Bottom",
+"tag": "section",
+"settings": [
+{
+"type": "image_picker",
+"id": "banner_image",
+"label": "Banner Image"
+}, {
+"type": "link_list",
+"id": "header-bottom-menu",
+"label": "Header Bottom Navigation Menu"
+},
+{
+"type": "image_picker",
+"id": "mega_promo_image",
+"label": "Promotion Image"
+}
+],
+"presets": [
+{
+"name": "Header Bottom"
+}
+]
 }
 {% endschema %}
