@@ -1,5 +1,5 @@
 <div class="page-width">
-  <div class="benefits__container align-{{ section.settings.benefits_vertical_alignment }}">
+  <div class="benefits__container align-{{ section.settings.benefits_alignment }}" style="margin : {{ section.settings.benefits-margin }}px 0;">
     {% for block in section.blocks %}
       <div class="benefits__content" {{ block.shopify_attributes }}>
         <div class="benefits__icon-container">
@@ -26,7 +26,6 @@
 
 <style>
   .benefits__container {
-    margin: 72px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -79,16 +78,16 @@
   }
 
   /* Vertical alignment classes */
-  .align-top .benefits__content {
-    align-self: flex-start;
+  .align-left .benefits___heading {
+    align-items: flex-start;
   }
 
-  .align-middle .benefits__content {
-    align-self: center;
+  .align-middle .benefits___heading {
+    align-items: center;
   }
 
-  .align-bottom .benefits__content {
-    align-self: flex-end;
+  .align-right .benefits___heading {
+    align-items: flex-end;
   }
 
   /* Responsive */
@@ -105,23 +104,29 @@
   "settings": [
     {
       "type": "select",
-      "id": "benefits_vertical_alignment",
-      "label": "Vertical alignment",
+      "id": "benefits_alignment",
+      "label": "Benefits alignment",
       "options": [
         {
-          "value": "top",
-          "label": "Top"
+          "value": "left",
+          "label": "Left"
         },
         {
           "value": "middle",
           "label": "Middle"
         },
         {
-          "value": "bottom",
-          "label": "Bottom"
+          "value": "right",
+          "label": "Right"
         }
       ],
-      "default": "middle"
+      "default": "left"
+    },
+    {
+        "type": "number",
+        "id": "benefits-margin",
+        "label": "Benefits Margin",
+        "default" : 72
     }
   ],
   "blocks": [
