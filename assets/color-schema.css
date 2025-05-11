@@ -1,0 +1,14 @@
+ :root{
+    --primary-color: black;
+    --primary-bg: #222934;
+    --primary-bg-hover: #333D4C;
+    --heading-color: #FFFFFF;
+    --secondary-bg:#FFFFFF;
+    --secondary-bg-hover:#F5F7FA;
+    --secondary-border:#EEF1F6;
+    --secondary-heading:#181D25;
+    --secondary-subtitle:#4E5562;
+    --primary-btn-bg:#F55266;
+    --primary-btn-text: #FFFFFF;
+}
+  

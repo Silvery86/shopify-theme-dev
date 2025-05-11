@@ -1,3 +1,5 @@
+{{ 'benefits.css' | asset_url | stylesheet_tag }}
+
 <div class="page-width">
   <div class="benefits__container align-{{ section.settings.benefits_alignment }}" style="margin : {{ section.settings.benefits-margin }}px 0;">
     {% for block in section.blocks %}
@@ -23,80 +25,6 @@
     {% endfor %}
   </div>
 </div>
-
-<style>
-  .benefits__container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .benefits__content {
-    flex: 1 1 calc(25% - 2rem); /* Max 4 per row */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    max-height: 86px;
-    gap: 12px;
-  }
-
-  .benefits__icon-container {
-    width: 86px;
-    height: 86px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: #f5f7fa;
-  }
-
-  .benefit-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    }
-
-   .benefits___heading {
-    flex: 1 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-   }
-  .benefits__title {
-    color: #181D25;
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 0.25rem;
-  }
-
-  .benefits__subtitle {
-    font-size: 14px;
-    color: #4E5562;
-  }
-
-  /* Vertical alignment classes */
-  .align-left .benefits___heading {
-    align-items: flex-start;
-  }
-
-  .align-middle .benefits___heading {
-    align-items: center;
-  }
-
-  .align-right .benefits___heading {
-    align-items: flex-end;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .benefits__content {
-      flex: 1 1 100%;
-    }
-  }
-</style>
 
 {% schema %}
 {
