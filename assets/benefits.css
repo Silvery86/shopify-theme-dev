@@ -66,6 +66,15 @@
   /* Responsive */
   @media (max-width: 768px) {
     .benefits__content {
-      flex: 1 1 100%;
+      flex: 1 1 calc(50% - 2rem);
+      flex-direction: column;
+    }
+
+    .benefits__icon-container {
+      height: 86px;
+    }
+
+    .benefits__content {
+      max-height: 200px;
     }
   }
