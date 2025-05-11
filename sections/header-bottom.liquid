@@ -1,125 +1,194 @@
 {{ 'header-bottom.css' | asset_url | stylesheet_tag }}
 
 <section class="header-bottom">
-    <div class="header-bottom-wrapper">
-        <div class="header-bottom__top">
-            <div class="page-width">
-                <div class="header-bottom__container">
-                    <div class="header-bottom__categories">
-                        {{ linklists['categories'].title }}
-                    </div>
-                    <div class="header-bottom__nav">
-                        <div class="nav__menu">
-                            {% if section.settings.header-bottom-menu != blank %}
-                            {% for link in linklists[section.settings.header-bottom-menu].links %}
-                            <div class="nav__item">
-                                <a href="{{ link.url }}">{{ link.title }}</a>
-                            </div>
-                            {% endfor %}
-                            {% else %}
-                            <div class="nav__item">Please select a menu in the section settings.</div>
-                            {% endif %}
-                        </div>
-                        <div class="header-bottom__options">
-                            <div class="header-bottom__language">
-                                English
-                            </div>
-                            <div class="header-bottom__currency">
-                                USD
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="header-bottom-wrapper">
+    <div class="header-bottom__top">
+      <div class="page-width">
+        <div class="header-bottom__container">
+          <div class="header-bottom__categories">
+            {{ linklists.categories.title }}
+          </div>
+          <div class="header-bottom__nav">
+            <div class="nav__menu">
+              {% if section.settings['header-bottom-menu'] != blank %}
+                {% for link in linklists[section.settings['header-bottom-menu']].links %}
+                  <div class="nav__item">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="nav__item">Please select a menu in the section settings.</div>
+              {% endif %}
             </div>
-        </div>
-        {% if template == "index" %}
-        <div class="header-bottom__bottom">
-            <div class="page-width">
-                <div class="header-bottom__hero-banner">
-                    <div class="hero-banner__mega-menu">
-                        {% for link in linklists['categories'].links %}
-                        <div class="mega-menu__item">
-                            <div class="mega-menu__list">
-                                <a href="{{ link.url }}">{{ link.title }}</a>
-                            </div>
-                            {% if link.links != blank %}
-                            <div class="mega-menu__dropdown">
-                                <div class="mega-menu__columns">
-                                    {% for child in link.links %}
-                                    <div class="mega-menu__column">
-                                        <h4 class="mega-menu__column-title">{{ child.title }}</h4>
-                                        {% if child.links != blank %}
-                                        <ul class="mega-menu__column-list">
-                                            {% for grandchild in child.links %}
-                                            <li>
-                                                <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
-                                        {% endif %}
-                                    </div>
-                                    {% endfor %}
-
-                                </div>
-                                <div class="mega-menu__promo">
-                                    <div class="mega-menu__promo-content">
-                                        <p class="mega-menu__promo-subtitle">Deal of the week</p>
-                                        <h3 class="mega-menu__promo-title">iPad Pro M1</h3>
-                                    </div>
-                                    <img src="{{ section.settings.mega_promo_image | image_url }}" alt="Promo Image"
-                                        width="252" height="195">
-
-                                    <a href="#" class="mega-menu__promo-button">Shop now</a>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <div class="hero-banner__container">
-                        <div class="hero-banner__content">
-                            <p class="hero-banner__subtitle">Feel the real quality sound
-                            </p>
-                            <h2 class="hero-banner__heading">Headphones ProMax</h2>
-                            <a href="#" class="hero-banner__button button">Shop now</a>
-                        </div>
-                        <div class="hero-banner__image">
-                            <img src="{{ section.settings.banner_image | image_url: width: 300 }}"
-                                alt="Hero Banner Image" width="full" height="300px" />
-                        </div>
-                    </div>
-                </div>
+            <div class="header-bottom__options">
+              <div class="header-bottom__language">English</div>
+              <div class="header-bottom__currency">USD</div>
             </div>
-
+          </div>
         </div>
-        {% endif %}
+      </div>
     </div>
+    {% if template == 'index' %}
+      <div class="header-bottom__bottom">
+        <div class="page-width">
+          <div class="header-bottom__hero-banner">
+            <div class="hero-banner__mega-menu">
+              {% for link in linklists.categories.links %}
+                <div class="mega-menu__item">
+                  <div class="mega-menu__list">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </div>
+                  {% if link.links != blank %}
+                    <div class="mega-menu__dropdown">
+                      <div class="mega-menu__columns">
+                        {% for child in link.links %}
+                          <div class="mega-menu__column">
+                            <h4 class="mega-menu__column-title">{{ child.title }}</h4>
+                            {% if child.links != blank %}
+                              <ul class="mega-menu__column-list">
+                                {% for grandchild in child.links %}
+                                  <li>
+                                    <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                      </div>
+                      {% assign collection = link.object %}
+                      {% if link.type == 'collection_link'
+                        and collection.metafields.custom.promotion_banner_mega_menu != blank
+                      %}
+                        {% assign promo = collection.metafields.custom.promotion_banner_mega_menu.value %}
+
+                        <div class="mega-menu__promo">
+                          <div class="mega-menu__promo-content">
+                            {% if promo.subtitle != blank %}
+                              <p class="mega-menu__promo-subtitle">{{ promo.subtitle }}</p>
+                            {% endif %}
+                            {% if promo.heading != blank %}
+                              <h3 class="mega-menu__promo-title">{{ promo.heading }}</h3>
+                            {% endif %}
+                          </div>
+
+                          {% if promo.image != blank %}
+                            <img
+                              src="{{ promo.image | image_url }}"
+                              alt="{{ promo.image.alt | default: promo.heading }}"
+                              width="252"
+                              height="195"
+                            >
+                          {% endif %}
+
+                          {% if promo.button_text != blank and promo.button_collection != blank %}
+                            <a href="{{ promo.button_collection.url }}" class="mega-menu__promo-button">
+                              {{ promo.button_text }}
+                            </a>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div
+              class="hero-banner__container"
+              style="background: linear-gradient(to right, {{ section.settings.gradient_color_1 }}, {{ section.settings.gradient_color_2 }})"
+            >
+              <div class="hero-banner__content">
+                <div class="hero-banner__subtitle">{{ section.settings['banner-subtitle'] }}</div>
+                <div class="hero-banner__heading">{{ section.settings['banner-heading'] }}</div>
+                <a href="{{ section.settings.banner-button-url }}" class="hero-banner__button button">
+                  {{- section.settings['banner-button-text'] -}}
+                </a>
+              </div>
+              <div class="hero-banner__image">
+                <img
+                  src="{{ section.settings.banner_image | image_url: width: 300 }}"
+                  alt="Hero Banner Image"
+                  width="full"
+                  height="300px"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
 </section>
 
 {% schema %}
 {
-"name": "Header Bottom",
-"tag": "section",
-"settings": [
-{
-"type": "image_picker",
-"id": "banner_image",
-"label": "Banner Image"
-}, {
-"type": "link_list",
-"id": "header-bottom-menu",
-"label": "Header Bottom Navigation Menu"
-},
-{
-"type": "image_picker",
-"id": "mega_promo_image",
-"label": "Promotion Image"
-}
-],
-"presets": [
-{
-"name": "Header Bottom"
-}
-]
+  "name": "Header Bottom",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Setting"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "label": "Banner Heading",
+      "id": "banner-heading",
+      "default": "Headphone Promax"
+    },
+    {
+      "type": "richtext",
+      "id": "banner-subtitle",
+      "label": "Banner Subtitle",
+      "info": "Banner Subtitle Text"
+    },
+    {
+      "type": "header",
+      "content": "Mega Menu Setting"
+    },
+    {
+      "type": "link_list",
+      "id": "header-bottom-menu",
+      "label": "Header Bottom Navigation Menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "mega_promo_image",
+      "label": "Promotion Image"
+    },
+    {
+      "type": "url",
+      "id": "banner-button-url",
+      "label": "Banner Button Link",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "banner-button-text",
+      "label": "Banner Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_1",
+      "label": "Banner Gradient Color 1",
+      "default": "#ACCBEE"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_2",
+      "label": "Banner Gradient Color 2",
+      "default": "#E7F0FD"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Bottom"
+    }
+  ]
 }
 {% endschema %}
