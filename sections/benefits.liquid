@@ -1,0 +1,163 @@
+<div class="page-width">
+  <div class="benefits__container align-{{ section.settings.benefits_vertical_alignment }}">
+    {% for block in section.blocks %}
+      <div class="benefits__content" {{ block.shopify_attributes }}>
+        <div class="benefits__icon-container">
+            {% if block.settings['benefit-icon'] != blank %}
+                {{
+                    block.settings['benefit-icon']
+                    | image_url: width: 32, height: 32
+                    | image_tag: alt: block.settings['benefit-title'], class: 'benefit-icon'
+                }}
+            {% endif %}
+        </div>
+        <div class="benefits___heading">
+          <div class="benefits__title">
+            {{ block.settings['benefit-title'] }}
+          </div>
+          <div class="benefits__subtitle">
+            {{ block.settings['benefit-subtitle'] }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .benefits__container {
+    margin: 72px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .benefits__content {
+    flex: 1 1 calc(25% - 2rem); /* Max 4 per row */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    max-height: 86px;
+    gap: 12px;
+  }
+
+  .benefits__icon-container {
+    width: 86px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f5f7fa;
+  }
+
+  .benefit-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    }
+
+   .benefits___heading {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+   }
+  .benefits__title {
+    color: #181D25;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 0.25rem;
+  }
+
+  .benefits__subtitle {
+    font-size: 14px;
+    color: #4E5562;
+  }
+
+  /* Vertical alignment classes */
+  .align-top .benefits__content {
+    align-self: flex-start;
+  }
+
+  .align-middle .benefits__content {
+    align-self: center;
+  }
+
+  .align-bottom .benefits__content {
+    align-self: flex-end;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .benefits__content {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "benefits_vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "middle"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "benefit",
+      "type": "benefit",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Benefit Setting"
+        },
+        {
+          "type": "text",
+          "id": "benefit-title",
+          "label": "Benefit Title",
+          "default": "Benefit"
+        },
+        {
+          "type": "text",
+          "id": "benefit-subtitle",
+          "label": "Benefit Subitle",
+          "default": "Subtitle"
+        },
+        {
+          "type": "image_picker",
+          "id": "benefit-icon",
+          "label": "Benefit Icon"
+        }
+      ],
+      "limit": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section"
+    }
+  ]
+}
+{% endschema %}

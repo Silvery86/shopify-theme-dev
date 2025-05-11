@@ -1,7 +1,18 @@
 {
   "article": [],
   "blog": [],
-  "collection": [],
+  "collection": [
+    {
+      "key": "promotion_banner_mega_menu",
+      "namespace": "custom",
+      "name": "Promotion Banner Mega Menu",
+      "description": "",
+      "type": {
+        "name": "mixed_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "company": [],
   "company_location": [],
   "location": [],
