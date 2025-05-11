@@ -1,0 +1,203 @@
+<div class="page-width">
+  <div class="product-banner__title">
+    {{ section.settings['products-banner-heading'] }}
+  </div>
+  <div class="products-banner__container">
+    <div class="products-banner__banner">
+      {% if section.settings['banner-image'] %}
+        <div class="products-banner__banner">
+          <a href="{{ section.settings.banner-button-url }}">
+            <img
+              src="{{ section.settings.banner-image | image_url }}"
+              alt="{{ section.settings.banner-button-text | escape }}"
+              width="416px"
+              height="535px"
+              class="banner-image"
+            >
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="products-banner__products">
+      {% for product in section.settings['products-list'] limit: 8 %}
+        <div class="product-item">
+          <a href="{{ product.url }}">
+            {{ product | image_url: width: 110 , height: 110 | image_tag: class: 'product-image', alt: product.title , width: 110 , height : 110 }}
+          </a>
+          <div class="product-info">
+            <div class="product-rating">
+              {% if product.metafields.custom.fake_rating %}
+                 {% render 'product-rating-products', product: product %}
+                {% endif %}
+            </div>
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-price">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="product-compare-at-price">
+                  {{ product.compare_at_price | money }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .products-banner__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .product-banner__title {
+    color: var(--secondary-heading);
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  .products-banner__banner {
+    height: 100%;
+    flex: 0 0 33%;
+    border-radius: 16px;
+  }
+
+  .products-banner__banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    display: block;
+  }
+
+  .products-banner__products {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+
+  .product-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .product-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
+  .product-info {
+    flex: 1;
+  }
+
+  .product-title {
+    color: var(--secondary-heading);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--secondary-heading);
+  }
+
+  .product-compare-at-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: var(--secondary-subtitle);
+    margin-left: 0.5rem;
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .products-banner__container {
+      flex-direction: column;
+    }
+
+    .products-banner__banner img {
+        max-height: 465px;
+    }
+
+    .products-banner__banner,
+    .products-banner__products {
+      flex: 1 1 100%;
+    }
+
+    .products-banner__products {
+      grid-template-columns: 1fr;
+    }
+
+    .product-item {
+      gap: 16px;
+    }
+
+    .product-banner__title {
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-size: 14px;
+    }
+
+    .product-price {
+      font-size: 20px;
+    }
+
+    .product-item img {
+      width: 110px;
+      height: 110px;
+    }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Products Grid With Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "products-banner-heading",
+      "label": "Products Banner Heading",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "header",
+      "content": "Banner Setting"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner-image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "url",
+      "id": "banner-button-url",
+      "label": "Banner Button Link"
+    },   
+    {
+      "type": "header",
+      "content": "Products Setting"
+    },
+    {
+      "type": "product_list",
+      "id": "products-list",
+      "label": "List selected products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Grid With Banner"
+    }
+  ]
+}
+{% endschema %}
