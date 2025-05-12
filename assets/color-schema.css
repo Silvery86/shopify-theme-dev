@@ -1,5 +1,5 @@
  :root{
-    --primary-color: black;
+    --primary-color: #181D25;
     --primary-bg: #222934;
     --primary-bg-hover: #333D4C;
     --heading-color: #FFFFFF;
@@ -7,9 +7,11 @@
     --secondary-bg-hover:#F5F7FA;
     --secondary-border:#EEF1F6;
     --secondary-heading:#181D25;
+    --secondary-text:#222934;
     --secondary-subtitle:#4E5562;
     --primary-btn-bg:#F55266;
     --primary-btn-text: #FFFFFF;
     --warning-color : #FC9231;
+    --discount-price-text : #9CA3AF;
 }
   
