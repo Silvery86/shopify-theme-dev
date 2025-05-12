@@ -75,10 +75,32 @@
           "commuter-briefcase-brown"
         ]
       }
+    },
+    "trending_products_YrxNTy": {
+      "type": "trending-products",
+      "name": "Trending Products",
+      "settings": {
+        "trending-product-heading": "Trending products",
+        "trending-product-view-all": "View all",
+        "trending-product-link": "shopify://collections",
+        "trending-products-list": [
+          "airpods-leather-case",
+          "black-valet-tray",
+          "commuter-briefcase-black",
+          "commuter-briefcase-brown",
+          "black-black-leather-core-watch",
+          "core-black-black-mesh-watch",
+          "core-silver-brown-leather-watch",
+          "core-silver-black-leather-core",
+          "black-brown-leather-core-watch",
+          "black-water-bottle"
+        ]
+      }
     }
   },
   "order": [
     "benefits_9eccJL",
-    "products_with_banner_9zEPM6"
+    "products_with_banner_9zEPM6",
+    "trending_products_YrxNTy"
   ]
 }
