@@ -53,10 +53,25 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "header_bottom_xrV68y": {
+      "type": "header-bottom",
+      "name": "Header Bottom",
+      "settings": {
+        "banner_image": "shopify://shop_images/z6579134901028_dd665c888d0547c2eff62de3d8030385-removebg-preview.png",
+        "banner-heading": "Headphone Promax",
+        "banner-subtitle": "<p>Feel the real quality sound </p>",
+        "header-bottom-menu": "",
+        "banner-button-url": "/",
+        "banner-button-text": "Shop Now",
+        "gradient_color_1": "#ACCBEE",
+        "gradient_color_2": "#E7F0FD"
+      }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "header_bottom_xrV68y"
   ]
 }
