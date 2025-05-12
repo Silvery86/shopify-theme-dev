@@ -16,28 +16,32 @@
           "type": "benefit",
           "settings": {
             "benefit-title": "Free Shipping & Returns",
-            "benefit-subtitle": "For all orders over $199.00"
+            "benefit-subtitle": "For all orders over $199.00",
+            "benefit-icon": "shopify://shop_images/delivery-truck.svg"
           }
         },
         "benefit_bnLYmh": {
           "type": "benefit",
           "settings": {
             "benefit-title": "Secure Payment",
-            "benefit-subtitle": "We ensure secure payment"
+            "benefit-subtitle": "We ensure secure payment",
+            "benefit-icon": "shopify://shop_images/card-svg.svg"
           }
         },
         "benefit_T7TX9n": {
           "type": "benefit",
           "settings": {
             "benefit-title": "Money Back Guarantee",
-            "benefit-subtitle": "Returning money 30 days"
+            "benefit-subtitle": "Returning money 30 days",
+            "benefit-icon": "shopify://shop_images/cycle-svg.svg"
           }
         },
         "benefit_McyrxR": {
           "type": "benefit",
           "settings": {
             "benefit-title": "24/7 Customer Support",
-            "benefit-subtitle": "Friendly customer support"
+            "benefit-subtitle": "Friendly customer support",
+            "benefit-icon": "shopify://shop_images/chat-svg.svg"
           }
         }
       },
