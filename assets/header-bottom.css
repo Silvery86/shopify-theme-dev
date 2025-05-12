@@ -180,9 +180,10 @@
 
 .hero-banner__heading {
     font-size: 50px;
+    line-height: 68px;
     font-weight: 700;
     text-wrap: wrap;
-    margin: 0;
+    margin-bottom: 24px;
 }
 
 .hero-banner__content {
@@ -200,10 +201,16 @@
     padding: 40px;
 }
 
+.hero-banner__image {
+    height: 100%;
+}
+
 .hero-banner__image img {
     width: 100%;
-    height: calc(546px - 20px);
+    height: auto;
+    min-height: 300px;
     object-fit: cover;
+    align-self: flex-end;
 }
 
 .header-bottom__hero-banner {
@@ -323,6 +330,7 @@
     }
 
     .hero-banner__container {
+        margin: 24px 0;
         flex-direction: column;
     }
 
@@ -347,8 +355,13 @@
 
     .hero-banner__heading{
         font-size: 34px;
+        line-height: 41px;
+        margin-bottom: 24px;
     }
     .hero-banner__subtitle{
-        font-size: 26px;
+        font-size: 16px;
+    }
+    .hero-banner__subtitle p {
+        margin: 0;
     }
   }
