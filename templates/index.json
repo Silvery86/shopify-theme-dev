@@ -29,15 +29,15 @@
         "benefit_T7TX9n": {
           "type": "benefit",
           "settings": {
-            "benefit-title": "Benefit",
-            "benefit-subtitle": "Subtitle"
+            "benefit-title": "Money Back Guarantee",
+            "benefit-subtitle": "Returning money 30 days"
           }
         },
         "benefit_McyrxR": {
           "type": "benefit",
           "settings": {
-            "benefit-title": "Benefit",
-            "benefit-subtitle": "Subtitle"
+            "benefit-title": "24/7 Customer Support",
+            "benefit-subtitle": "Friendly customer support"
           }
         }
       },
