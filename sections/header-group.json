@@ -61,7 +61,7 @@
         "banner_image": "shopify://shop_images/z6579134901028_dd665c888d0547c2eff62de3d8030385-removebg-preview.png",
         "banner-heading": "Headphone Promax",
         "banner-subtitle": "<p>Feel the real quality sound </p>",
-        "header-bottom-menu": "",
+        "header-bottom-menu": "header-bottom-menu",
         "banner-button-url": "/",
         "banner-button-text": "Shop Now",
         "gradient_color_1": "#ACCBEE",
