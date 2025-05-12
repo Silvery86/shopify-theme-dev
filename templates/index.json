@@ -56,9 +56,29 @@
         "benefits_alignment": "left",
         "benefits-margin": 72
       }
+    },
+    "products_with_banner_9zEPM6": {
+      "type": "products-with-banner",
+      "name": "Products Grid With Banner",
+      "settings": {
+        "products-banner-heading": "New Arrivals",
+        "banner-image": "shopify://shop_images/image.png",
+        "banner-button-url": "shopify://collections/computers",
+        "products-list": [
+          "commuter-briefcase-black",
+          "core-black-black-mesh-watch",
+          "black-brown-leather-core-watch",
+          "core-silver-black-leather-core",
+          "dopp-kit",
+          "crossbody-pack-bag",
+          "genuine-leather-card-holder-brown",
+          "commuter-briefcase-brown"
+        ]
+      }
     }
   },
   "order": [
-    "benefits_9eccJL"
+    "benefits_9eccJL",
+    "products_with_banner_9zEPM6"
   ]
 }
