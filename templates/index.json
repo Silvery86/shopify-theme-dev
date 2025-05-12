@@ -52,40 +52,9 @@
         "benefits_alignment": "left",
         "benefits-margin": 72
       }
-    },
-    "rich_text_X38Qqb": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_UN3PzX": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Business Customer?</strong>",
-            "heading_size": "h1"
-          }
-        },
-        "text_QUD7qd": {
-          "type": "text",
-          "settings": {
-            "text": "<p>If you're purchasing on behalf of a business, we may be able to offer you a discount, find out more information<a href=\"https://ulxstore.com/pages/business-customers\" title=\"https://ulxstore.com/pages/business-customers\">here</a>.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_UN3PzX",
-        "text_QUD7qd"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
     }
   },
   "order": [
-    "benefits_9eccJL",
-    "rich_text_X38Qqb"
+    "benefits_9eccJL"
   ]
 }
