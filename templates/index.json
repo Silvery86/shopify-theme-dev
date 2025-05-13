@@ -96,11 +96,22 @@
           "black-water-bottle"
         ]
       }
+    },
+    "sale_banner_fmzx9z": {
+      "type": "sale-banner",
+      "name": "Sale Banner",
+      "settings": {
+        "sale-percent": 20,
+        "banner-title": "Seasonal weekly sale 2025",
+        "banner-subtitle": "<p>Use code  <strong>Sale2025</strong>  to get best offer</p>",
+        "banner-image": "shopify://shop_images/camera.png"
+      }
     }
   },
   "order": [
     "benefits_9eccJL",
     "products_with_banner_9zEPM6",
-    "trending_products_YrxNTy"
+    "trending_products_YrxNTy",
+    "sale_banner_fmzx9z"
   ]
 }
