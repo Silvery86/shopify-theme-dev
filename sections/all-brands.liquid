@@ -1,0 +1,93 @@
+<div class="page-width">
+  <div class="all-brands__container">
+    {% for block in section.blocks %}
+        {%  if block.settings.brand-logo %} 
+      <div class="brand__container">
+        <img
+          src="{{ block.settings.brand-logo |  image_url }}"
+          alt="Brand Logo"
+          width="164px"
+          height="80px"
+        >
+      </div>
+       {% endif %}
+    {% endfor %}
+     {%  if section.settings.all-brands-logo %} 
+    <a href="{{ section.settings.all-brand-url }}" class="all-brand__url">
+        
+      <div class="brand__container">
+        <img src="{{ section.settings.all-brands-logo |  image_url  }}"
+        width="164"
+        height="80"/>       
+      </div>
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+    .all-brands__container {
+        margin: 72px 0;
+        display: grid;
+        grid-template-columns: repeat(6 , 1fr);
+        gap: 24px 16px;
+    }
+    .brand__container {
+        border: solid 1px var(--primary-border);
+        border-radius: 12px;
+         display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* --- TABLET STYLING --- */
+@media (max-width: 1024px) {
+.all-brands__container {       
+        grid-template-columns: repeat(3 , 1fr);       
+    }
+}
+    /* --- MOBILE STYLING --- */
+@media (max-width: 768px) {
+    .all-brands__container {
+        margin: 56px 0;
+        grid-template-columns: repeat(2 , 1fr);
+        gap: 16px;
+    }
+}
+</style>
+{% schema %}
+{
+  "name": "All Brands",
+  "settings": [
+    {
+      "type": "url",
+      "id": "all-brand-url",
+      "label": "All brands page"
+    },
+    {
+          "type": "image_picker",
+          "label": "All Brands Image",
+          "id": "all-brands-logo"
+        }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Brand Logo",
+          "id": "brand-logo"
+        }
+      ],
+      "limit": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Brands"
+    }
+  ]
+}
+{% endschema %}
