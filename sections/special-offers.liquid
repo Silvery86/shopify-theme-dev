@@ -1,0 +1,183 @@
+{{ 'special-offers.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+  <div class="special-offers__container">
+    <div class="special-offers__heading">
+      <div class="heading__content">
+        <div class="heading__title">
+          <h3>{{ section.settings['heading-title'] }}</h3>
+        </div>
+        <div
+  class="heading__count-down"
+  data-hours="{{ section.settings.count-down-hours }}"
+  data-minutes="{{ section.settings.count-down-minutes }}"
+  data-seconds="{{ section.settings.count-down-seconds | default: 0 }}"
+>
+  <span><strong class="countdown__hours">00</strong>h</span>
+  <span><strong class="countdown__minutes">00</strong>m</span>
+  <span><strong class="countdown__seconds">00</strong>s</span>
+</div>
+
+      </div>
+      <div class="heading__view-all">
+        <a href="{{ section.settings.special-offers-link }}">{{ section.settings['special-offers-view-all'] }}</a>
+      </div>
+    </div>
+    <div class="swiper special-offers__slider"
+    data-desktop="{{ section.settings.products-per-slide-desktop }}"
+     data-mobile="{{ section.settings.products-per-slide-mobile }}">
+      <div class="swiper-wrapper">
+        {% for product in section.settings['special-offers-list'] limit: section.settings['products-slider-total'] %}
+          <div class="swiper-slide">
+            {% render 'custom-product-card', product: product %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Optional Navigation -->
+      <div class="swiper-navigation">
+  <div class="swiper-button-prev"> </div>
+  <div class="swiper-button-next"> </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const countdownEl = document.querySelector(".heading__count-down");
+  if (countdownEl) {
+    const hours = parseInt(countdownEl.dataset.hours) || 0;
+    const minutes = parseInt(countdownEl.dataset.minutes) || 0;
+    const seconds = parseInt(countdownEl.dataset.seconds) || 0;
+
+    const totalSeconds = (hours * 60 * 60) + (minutes * 60) + seconds;
+    let remaining = totalSeconds;
+
+    const updateCountdown = () => {
+      if (remaining <= 0) return;
+
+      const hrs = Math.floor(remaining / 3600);
+      const mins = Math.floor((remaining % 3600) / 60);
+      const secs = remaining % 60;
+
+      document.querySelector(".countdown__hours").textContent = String(hrs).padStart(2, '0');
+      document.querySelector(".countdown__minutes").textContent = String(mins).padStart(2, '0');
+      document.querySelector(".countdown__seconds").textContent = String(secs).padStart(2, '0');
+
+      remaining--;
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  const sliderEl = document.querySelector(".special-offers__slider");
+  if (sliderEl && typeof Swiper !== "undefined") {
+    new Swiper(sliderEl, {
+      slidesPerView: parseInt(sliderEl.dataset.desktop) || 4,
+      spaceBetween: 24,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: parseInt(sliderEl.dataset.mobile) || 1
+        },
+        768: {
+          slidesPerView: parseInt(sliderEl.dataset.desktop) || 4
+        }
+      }
+    });
+  }
+});
+
+</script>
+{% schema %}
+{
+  "name": "Special Offers",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Special Offers Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading-title",
+      "label": "Heading Title",
+      "default": "Special offers for you"
+    },
+    {
+      "type": "number",
+      "id": "count-down-days",
+      "label": "Count down days",
+      "default": 12
+    },
+    {
+      "type": "number",
+      "id": "count-down-hours",
+      "label": "Count down hours",
+      "default": 12
+    },
+    {
+      "type": "number",
+      "id": "count-down-minutes",
+      "label": "Count down minutes",
+      "default": 12
+    },
+    {
+  "type": "number",
+  "id": "count-down-seconds",
+  "label": "Count down seconds",
+  "default": 0
+},
+    {
+      "type": "text",
+      "id": "special-offers-view-all",
+      "label": "View All Text",
+      "default": "View all"
+    },
+    {
+      "type": "number",
+      "id": "products-slider-total",
+      "label": "Number of total products in slider",
+      "default": 12
+    },
+    {
+      "type": "url",
+      "id": "special-offers-link",
+      "label": "View All Link"
+    },
+    {
+      "type": "product_list",
+      "id": "special-offers-list",
+      "label": "Special Offers Product List"
+    },
+    {
+  "type": "range",
+  "id": "products-per-slide-desktop",
+  "min": 2,
+  "max": 5,
+  "step": 1,
+  "label": "Products per slide (desktop)",
+  "default": 4
+},
+{
+  "type": "range",
+  "id": "products-per-slide-mobile",
+  "min": 1,
+  "max": 3,
+  "step": 1,
+  "label": "Products per slide (mobile)",
+  "default": 1
+}
+  ],
+  "presets": [
+    {
+      "name": "Special Offers"
+    }
+  ]
+}
+{% endschema %}
