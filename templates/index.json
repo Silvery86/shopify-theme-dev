@@ -106,12 +106,91 @@
         "banner-subtitle": "<p>Use code  <strong>Sale2025</strong>  to get best offer</p>",
         "banner-image": "shopify://shop_images/camera.png"
       }
+    },
+    "special_offers_8atPJJ": {
+      "type": "special-offers",
+      "name": "Special Offers",
+      "settings": {
+        "heading-title": "Special offers for you",
+        "count-down-days": 12,
+        "count-down-hours": 12,
+        "count-down-minutes": 12,
+        "count-down-seconds": 0,
+        "special-offers-view-all": "View all",
+        "products-slider-total": 12,
+        "special-offers-link": "",
+        "special-offers-list": [
+          "airpods-leather-case",
+          "black-valet-tray",
+          "classic-leather-backpack-black",
+          "commuter-briefcase-black",
+          "commuter-briefcase-brown",
+          "core-black-black-mesh-watch",
+          "black-black-leather-core-watch",
+          "black-brown-leather-core-watch",
+          "core-silver-black-leather-core",
+          "core-silver-brown-leather-watch",
+          "crossbody-pack-bag",
+          "dopp-kit"
+        ],
+        "products-per-slide-desktop": 4,
+        "products-per-slide-mobile": 2
+      }
+    },
+    "all_brands_cRAkfn": {
+      "type": "all-brands",
+      "blocks": {
+        "brand_4aFtgr": {
+          "type": "brand",
+          "settings": {
+            "brand-logo": "shopify://shop_images/z6605637630634_1e38c04a13c17c1164e036ff7b40b6ef.jpg"
+          }
+        },
+        "brand_d3QqHn": {
+          "type": "brand",
+          "settings": {
+            "brand-logo": "shopify://shop_images/z6605637774152_3de8150ae4e8a2a6a08091fd384554b3.jpg"
+          }
+        },
+        "brand_3dDwNH": {
+          "type": "brand",
+          "settings": {
+            "brand-logo": "shopify://shop_images/z6605637680489_f238ab25c14f1028c7171b5f4d7543d0.jpg"
+          }
+        },
+        "brand_RjnyVm": {
+          "type": "brand",
+          "settings": {
+            "brand-logo": "shopify://shop_images/z6605637747774_d97853c3680ebe091ed26af4bb9c8b87.jpg"
+          }
+        },
+        "brand_aiQteE": {
+          "type": "brand",
+          "settings": {
+            "brand-logo": "shopify://shop_images/z6605637704995_866718cdce506ab568ba93a0875b1591.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "brand_4aFtgr",
+        "brand_d3QqHn",
+        "brand_3dDwNH",
+        "brand_RjnyVm",
+        "brand_aiQteE"
+      ],
+      "name": "All Brand",
+      "settings": {
+        "all-brand-url": "",
+        "all-brands-logo": "shopify://shop_images/z6605754068726_dc628eaea362fbe65aef5874ef84b67d.jpg"
+      }
     }
   },
   "order": [
     "benefits_9eccJL",
     "products_with_banner_9zEPM6",
     "trending_products_YrxNTy",
-    "sale_banner_fmzx9z"
+    "sale_banner_fmzx9z",
+    "special_offers_8atPJJ",
+    "all_brands_cRAkfn"
   ]
 }
