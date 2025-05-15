@@ -297,6 +297,12 @@
       }
     </script>
     {{ 'color-schema.css' | asset_url | stylesheet_tag }}
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" />
+
+    <!-- Swiper JS -->
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
