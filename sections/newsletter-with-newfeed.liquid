@@ -1,0 +1,267 @@
+<div class="page-width">
+  <div class="newsletter-newsfeeds__container">
+    <div class="newsletter__container">
+      <div class="newsletter__title">
+        <h3>{{ section.settings['news-letter-title'] }}</h3>
+      </div>
+      <div class="newsletter__subtitle">
+        <p>{{ section.settings['news-letter-subtitle'] }}</p>
+      </div>
+      <div class="newsletter__form">
+        {% form 'customer' %}
+          {% if form.posted_successfully? %}
+            <p>Thank you for subscribing!</p>
+          {% elsif form.errors %}
+            <ul>
+              {% for field in form.errors %}
+                <li>{{ form.errors[field] | join: ', ' }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          <input type="email" name="contact[email]" placeholder="Your Email" required>
+          <button type="submit">Subscribe</button>
+        {% endform %}
+      </div>
+      <div class="newsletter__social-media">
+        <ul style="list-style: none; display: flex; gap: 10px; padding: 0;">
+          {% if section.settings.youtube_link %}
+            <li>
+              <a href="{{ section.settings.youtube_link }}" target="_blank" rel="noopener">
+                <img src="{{ 'youtube.svg' | asset_url }}" alt="YouTube" width="16px" height="16px">
+              </a>
+            </li>
+          {% endif %}
+          {% if section.settings.tiktok_link %}
+            <li>
+              <a href="{{ section.settings.tiktok_link }}" target="_blank" rel="noopener">
+                <img src="{{ 'tiktok.svg' | asset_url }}" alt="TikTok" width="16px" height="16px">
+              </a>
+            </li>
+          {% endif %}
+          {% if section.settings.facebook_link %}
+            <li>
+              <a href="{{ section.settings.facebook_link }}" target="_blank" rel="noopener">
+                <img src="{{ 'facebook.svg' | asset_url }}" alt="Facebook" width="16px" height="16px">
+              </a>
+            </li>
+          {% endif %}
+          {% if section.settings.instagram_link %}
+            <li>
+              <a href="{{ section.settings.instagram_link }}" target="_blank" rel="noopener">
+                <img src="{{ 'instagram.svg' | asset_url }}" alt="Instagram" width="16px" height="16px">
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="newsfeeds__container">
+      {% for i in (1..3) %}
+    {% assign article_setting = 'article_' | append: i %}
+    {% assign article = section.settings[article_setting] %}
+    {% if article %}
+      <div class="newsfeed__container">
+        <div class="newsfeed__image">
+          {% if article.image %}
+            <a href="{{ article.url }}">
+              <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}" width="140px" height="86px">
+            </a>
+          {% endif %}
+        </div>
+        <div class="newsfeed__content">
+          <div class="newsfeed__created-at">
+            {{ article.published_at | date: "%B %d, %Y" }}
+          </div>
+          <div class="newsfeed__title">
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="newsfeed__view-all">
+    {% if section.settings.article_1 %}
+      <a href="{{ section.settings.article_1.blog.url }}">View All</a>
+    {% endif %}
+  </div>
+    </div>
+  </div>
+</div>
+<style>
+    .newsletter-newsfeeds__container {
+        margin: 96px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: start;
+        gap: 200px;
+    }
+    .newsletter__title h3{
+        font-size: 24px;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 0;
+    }
+    .newsletter__subtitle p {
+         font-size: 16px;
+        color: var(--primary-subtitle);
+        font-weight: 500;
+        margin: 0 0 32px 0;
+    }
+
+    .newsletter__form form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .newsletter__form form input[name="contact[email]"] {
+        flex: 1;
+        padding: 12px 18px;
+        border-radius: 8px;
+        color: var(--primary-color);
+        border: solid 1px var(--input-border);
+    }
+
+    .newsletter__form form button{
+        padding: 12px 24px;
+        border-radius: 8px;
+        background-color: var(--primary-btn-bg);
+        color: var(--primary-btn-text);
+        border: none;
+    }
+    .newsletter__social-media ul li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        padding: 12px;
+        background-color: var(--secondary-border);
+    }
+
+    .newsletter__social-media ul li a {
+           display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .newsfeeds__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        gap: 16px;
+    }
+    .newsfeed__container {
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        gap: 8px;
+    }
+    .newsfeed__title a {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .newsfeed__created-at {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--primary-subtitle);
+    }
+    .newsfeed__view-all a {
+        text-decoration: none;
+        color: var(--primary-subtitle);
+        font-size: 15px;
+        font-weight: 700;
+    }
+    /* Tablet Responsive */
+  @media screen and (max-width: 1024px) {
+    .newsletter-newsfeeds__container{
+        gap: 50px;
+    }
+  }
+    /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .newsletter-newsfeeds__container{
+        margin: 56px 0;
+        flex-direction: column;
+        gap: 48px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Newsletter and Newsfeed",
+  "settings": [
+    {
+      "type": "header",
+      "content": "News Letter Setting"
+    },
+    {
+      "type": "text",
+      "id": "news-letter-title",
+      "label": "Newsletter Title",
+      "default": "Sign up to our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "news-letter-subtitle",
+      "label": "Newsletter Subtitle",
+      "default": "Receive our latest updates about our products & promotions"
+    },
+    {
+      "type": "header",
+      "content": "Add your social media links below"
+    },
+    {
+      "type": "url",
+      "id": "youtube_link",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_link",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Select your news feed"
+    },
+    {
+      "type": "article",
+      "id": "article_1",
+      "label": "News Article 1"
+    },
+    {
+      "type": "article",
+      "id": "article_2",
+      "label": "News Article 2"
+    },
+    {
+      "type": "article",
+      "id": "article_3",
+      "label": "News Article 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter and Newsfeed"
+    }
+  ]
+}
+{% endschema %}
