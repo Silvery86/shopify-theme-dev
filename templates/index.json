@@ -183,6 +183,21 @@
         "all-brand-url": "",
         "all-brands-logo": "shopify://shop_images/z6605754068726_dc628eaea362fbe65aef5874ef84b67d.jpg"
       }
+    },
+    "newsletter_with_newfeed_JVehC6": {
+      "type": "newsletter-with-newfeed",
+      "name": "Newsletter and Newsfeed",
+      "settings": {
+        "news-letter-title": "Sign up to our newsletter",
+        "news-letter-subtitle": "Receive our latest updates about our products & promotions",
+        "youtube_link": "#",
+        "tiktok_link": "#",
+        "facebook_link": "#",
+        "instagram_link": "#",
+        "article_1": "news/5-new-cool-gadgets-you-must-see-on-cartzilla-cheap-budget",
+        "article_2": "news/top-5-new-amazing-gadgets-on-cartzilla-you-must-see",
+        "article_3": "news/5-super-useful-gadgets-on-cartzilla-you-must-have-in-2023"
+      }
     }
   },
   "order": [
@@ -191,6 +206,7 @@
     "trending_products_YrxNTy",
     "sale_banner_fmzx9z",
     "special_offers_8atPJJ",
-    "all_brands_cRAkfn"
+    "all_brands_cRAkfn",
+    "newsletter_with_newfeed_JVehC6"
   ]
 }
