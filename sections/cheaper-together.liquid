@@ -1,0 +1,371 @@
+<div class="page-width">
+  <div class="cheaper-together__container">
+    <div class="cheaper-together__heading">
+      <h3>Cheaper together</h3>
+    </div>
+    {% assign related_products = collections.all.products | where: 'vendor', product.vendor %}
+    {% if related_products %}
+      {% assign remaining_products = '' %}
+      {% assign first_item = true %}
+
+      {% for related_product in related_products limit: 30 %}
+        {% unless related_product.id == product.id %}
+          {% unless first_item %}
+            {% assign remaining_products = remaining_products | append: ',' %}
+          {% endunless %}
+
+          {% assign remaining_products = remaining_products | append: related_product.handle %}
+          {% assign first_item = false %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    <cheaper-together
+      class="cheaper-together__products"
+      data-current-product-handle="{{ product.handle }}"
+      data-remaining-products="{{ remaining_products }}"
+    ></cheaper-together>
+  </div>
+</div>
+
+<style>
+  .cheaper-together__container {
+    margin: 96px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-bg-hover);
+    border-radius: 16px;
+  }
+  .cheaper-together__heading h3 {
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .cheaper-together__products {
+    width: 100%;
+    padding: 0 24px;
+  }
+</style>
+
+<script>
+  class CheaperTogether extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      const currentHandle = this.dataset.currentProductHandle;
+      const allHandles = this.dataset.remainingProducts
+        ? this.dataset.remainingProducts.split(',').filter(Boolean)
+        : [];
+
+      const maxIndex = Math.min(49, allHandles.length - 1);
+      let index1 = Math.floor(Math.random() * (maxIndex + 1));
+      let index2;
+      do {
+        index2 = Math.floor(Math.random() * (maxIndex + 1));
+      } while (index2 === index1);
+
+      const randomHandles = [allHandles[index1], allHandles[index2]];
+      const productHandles = [currentHandle, ...randomHandles];
+
+      this.products = [];
+      this.selectedIds = new Set();
+      this.total = 0;
+
+      this.renderProducts(productHandles);
+    }
+
+    async fetchProduct(handle) {
+      const res = await fetch(`/products/${handle}.js`);
+      if (!res.ok) throw new Error(`Product fetch failed: ${handle}`);
+      return await res.json();
+    }
+
+    async renderProducts(handles) {
+      const container = document.createElement('div');
+      container.className = 'cheaper-together-list';
+
+      for (const handle of handles) {
+        try {
+          const product = await this.fetchProduct(handle);
+          this.products.push(product);
+          this.selectedIds.add(product.variants[0].id); // select all by default
+
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.innerHTML = `
+            <label>
+              <input class="product-card__checkbox" type="checkbox" data-variant-id="${product.variants[0].id}" checked>
+              <img src="${product.featured_image}" width="300" height="300" alt="${product.title}" />
+              <div class="product-card__content">
+                <h4>${product.title}</h4>
+                <div class="product-card__price">
+                  <span class="price">${(product.price / 100).toFixed(2)} ${Shopify.currency.active}</span>
+                  ${
+                    product.compare_at_price > product.price
+                      ? `<span class="price--sale">${(product.compare_at_price / 100).toFixed(2)} ${
+                          Shopify.currency.active
+                        }</span>`
+                      : ''
+                  }
+                </div>
+              </div>
+            </label>
+          `;
+          container.appendChild(card);
+        } catch (error) {
+          console.warn('Failed to load product:', handle, error);
+        }
+      }
+
+      // Total and Button
+      const footer = document.createElement('div');
+      footer.className = 'cheaper-together-footer';
+      footer.innerHTML = `
+        <p>Total for selected products</p>
+        <div class="cheaper-together-total__content">
+            <p class="cheaper-together-total"></p>
+            <button class="cheaper-together-btn">Purchase Together</button>
+        </div>        
+      `;
+
+      this.shadowRoot.innerHTML = `
+        <style>
+        .cheaper-together-list {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            max-width: 300px;
+        }
+
+        .product-card__checkbox {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+        }
+
+        .product-card__content h4 {
+            margin: 0px;
+        }
+
+        .product-card__price .price {
+            color: var(--secondary-heading);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .product-card__price .price--sale {
+            text-decoration: line-through;
+            color: var(--discount-price-text);
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        .cheaper-together-footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-top: 1px solid #ccc;
+        }
+
+        .cheaper-together-total {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        button.cheaper-together-btn {
+            height: 100%;
+            background-color: var(--primary-btn-bg);
+            color: var(--primary-btn-text);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cheaper-together-total__content {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            width: 50%;
+            gap: 12px;
+            height: 40px;
+        }
+
+        .discount-badge {
+            background-color: var(--primary-btn-bg);
+            color: var(--primary-btn-text);
+            font-size: 14px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .cheaper-together-btn.disabled {
+            background-color: var(--secondary-subtitle);
+        }
+
+        @media screen and (max-width: 1024px) {
+            .product-card {
+                max-width: 200px;
+            }
+
+            .product-card img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .cheaper-together-footer {
+                padding: 24px 48px;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .cheaper-together-list {
+                flex-direction: column;
+
+            }
+
+            .product-card {
+                max-width: 400px;
+
+            }
+
+            .product-card img {
+                width: 400px;
+                height: 400px;
+            }
+
+            .cheaper-together-footer> :first-child {
+                display: none;
+            }
+
+            .cheaper-together-total__content {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }  
+        </style>
+      `;
+      this.shadowRoot.appendChild(container);
+      this.shadowRoot.appendChild(footer);
+
+      this.updateTotal();
+
+      // Add listeners
+      this.shadowRoot.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+          const id = Number(checkbox.dataset.variantId);
+          if (checkbox.checked) {
+            this.selectedIds.add(id);
+          } else {
+            this.selectedIds.delete(id);
+          }
+          this.updateTotal();
+        });
+      });
+
+      this.shadowRoot.querySelector('.cheaper-together-btn').addEventListener('click', () => {
+        this.addSelectedToCart();
+      });
+    }
+
+    updateTotal() {
+      const selectedProducts = this.products.filter((p) => this.selectedIds.has(p.variants[0].id));
+      const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+
+      let discount = 0;
+      let discountPercent = 0;
+
+      if (this.selectedIds.size === 2) {
+        discountPercent = 3;
+        discount = total * 0.03;
+      } else if (this.selectedIds.size === 3) {
+        discountPercent = 5;
+        discount = total * 0.05;
+      }
+
+      const finalTotal = (total - discount) / 100;
+      const totalEl = this.shadowRoot.querySelector('.cheaper-together-total');
+      const purchaseButton = this.shadowRoot.querySelector('.cheaper-together-btn');
+
+      if (discount > 0) {
+        totalEl.innerHTML = `
+    ${finalTotal.toFixed(2)} ${Shopify.currency.active}
+    <span class="discount-badge">–${discountPercent}%</span>
+  `;
+      } else {
+        totalEl.innerHTML = `
+        ${(total / 100).toFixed(2)} ${Shopify.currency.active}
+          <span class="discount-badge">0%</span>
+         `;
+      }
+
+      if (selectedProducts.length === 0) {
+        purchaseButton.disabled = true;
+        purchaseButton.classList.add('disabled');
+      } else {
+        purchaseButton.disabled = false;
+        purchaseButton.classList.remove('disabled');
+      }
+    }
+
+    addSelectedToCart() {
+      const items = this.products
+        .filter((p) => this.selectedIds.has(p.variants[0].id))
+        .map((p) => ({
+          id: p.variants[0].id,
+          quantity: 1,
+        }));
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to add to cart');
+          return res.json();
+        })
+        .then(() => {
+          window.location.href = '/cart';
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
+
+  customElements.define('cheaper-together', CheaperTogether);
+</script>
+{% schema %}
+{
+  "name": "Cheaper Together",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Cheaper Together"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,72 @@
+{% comment %}
+  Only show on product pages
+{% endcomment %}
+{% if template.name == 'product' %}
+  <div class="page-width">
+    <div class="product-options__container">
+      <div class="product-options__title">
+        <h3>{{ product.title }}</h3>
+      </div>   
+      <div class="product-options__info">
+        <div class="product-options__info-tabs">
+          <a href="#general-info" class="product-options__tab active">General info</a>
+          <a href="#product-details" class="product-options__tab">Product details</a>
+          <a href="#reviews" class="product-options__tab">Reviews</a>
+        </div>
+        <div class="product-options__info-review">
+          {% if product.metafields.custom.fake_rating %}
+            {% render 'product-rating-products', product: product %}
+          {% endif %}
+        </div>
+      </div>
+     </div>
+  </div>
+{% endif %}
+<style>
+  .product-options__container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 24px;
+  }
+  .product-options__title h3 {
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .product-options__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .product-options__info-tabs {
+    display: flex;
+    flex: 1;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+  }
+  .product-options__tab.active{
+    text-decoration: underline;
+  }
+  .product-options__tab {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+  }
+</style>
+{% schema %}
+{
+  "name": "Product Options",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Options"
+    }
+  ]
+}
+{% endschema %}

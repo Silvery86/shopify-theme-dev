@@ -1,0 +1,43 @@
+{% comment %}
+  Only show on product pages
+{% endcomment %}
+{% if template.name == 'product' %}
+  <div class="page-width">
+    <nav class="product-page__breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>&rsaquo;</span>
+      <a href="/collections/{{ product.collections.first.handle }}">
+        {{ product.collections.first.title }}
+      </a>
+      <span>&rsaquo;</span>
+      <span>{{ product.title }}</span>
+    </nav>
+  </div>
+{% endif %}
+<style>
+  .product-page__breadcrumb {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .product-page__breadcrumb a{
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+
+</style>
+{% schema %}
+{
+  "name": "Product Breadcrumb",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Breadcrumb"
+    }
+  ]
+}
+{% endschema %}
