@@ -11,6 +11,16 @@
         "name": "mixed_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "collection_icon",
+      "namespace": "custom",
+      "name": "collection-icon",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "company": [],
@@ -128,6 +138,16 @@
       "type": {
         "name": "number_integer",
         "category": "NUMBER"
+      }
+    },
+    {
+      "key": "office-supply-material",
+      "namespace": "shopify",
+      "name": "Office supply material",
+      "description": "Identifies the main material of office supplies, like leather or cardboard",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     }
   ],
