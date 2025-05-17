@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "product_breadcrumb_M7Twrq": {
+      "type": "product-breadcrumb",
+      "name": "Product Breadcrumb",
+      "settings": {}
+    },
+    "product_options_E8UwYn": {
+      "type": "product-options",
+      "name": "Product Options",
+      "settings": {}
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -19,20 +29,16 @@
             "text_style": "uppercase"
           }
         },
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
             "swatch_shape": "circle"
           }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
         },
         "quantity_selector": {
           "type": "quantity_selector",
@@ -41,8 +47,8 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
           }
         },
         "description": {
@@ -58,9 +64,8 @@
       },
       "block_order": [
         "vendor",
-        "title",
-        "price",
         "variant_picker",
+        "price",
         "quantity_selector",
         "buy_buttons",
         "description",
@@ -69,9 +74,9 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_size": "large",
+        "media_size": "medium",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "gallery_layout": "stacked",
         "mobile_thumbnails": "hide",
         "media_position": "left",
@@ -81,6 +86,26 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
+    },
+    "trending_products_qeNyma": {
+      "type": "trending-products",
+      "name": "Trending Products",
+      "settings": {
+        "trending-product-heading": "Trending products",
+        "trending-product-view-all": "View all",
+        "trending-product-link": "",
+        "trending-products-list": [
+          "airpods-leather-case",
+          "black-valet-tray",
+          "classic-leather-backpack-black",
+          "commuter-briefcase-black"
+        ]
+      }
+    },
+    "cheaper_together_L9UVxR": {
+      "type": "cheaper-together",
+      "name": "Cheaper Together",
+      "settings": {}
     },
     "related-products": {
       "type": "related-products",
@@ -102,7 +127,11 @@
     }
   },
   "order": [
+    "product_breadcrumb_M7Twrq",
+    "product_options_E8UwYn",
     "main",
+    "cheaper_together_L9UVxR",
+    "trending_products_qeNyma",
     "related-products"
   ]
 }
