@@ -1,3 +1,4 @@
+{{ 'header-custom.css' |  asset_url |  stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -222,7 +223,6 @@
         </h1>
       {%- endif -%}
     {%- endif -%}
-
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -247,8 +247,11 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
+      {% if section.settings.logo_position == 'top-left' %}
+          {% render 'search-input', input_id: 'Search-In-Modal' %}
+      {% render 'discount-block' %}
+      {% endif %}
+    
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"

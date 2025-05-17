@@ -34,8 +34,37 @@
           <div class="header-bottom__hero-banner">
             <div class="hero-banner__mega-menu">
               {% for link in linklists.categories.links %}
+                {% assign collection = link.object %}
+                 {% if link.type == 'collection_link' %}
+
+                {% if collection.metafields.custom.collection_icon %}
+                  <style>
+                    .mega-menu__list--{{ collection.handle }}::before {
+                    content: '';
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-size: 20px 20px !important;
+                    margin-right: 8px;
+                    background: url({{ collection.metafields.custom.collection_icon | image_url }}) no-repeat center;
+                    }
+                  </style>
+                  {% else %}
+                  <style>
+                    .mega-menu__list--{{ collection.handle }}::before {
+                    content: '';
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                    margin-right: 8px;
+                    background: url({{ "icon-check-mark.svg" | asset_url }} ) no-repeat center;
+                    }
+                    </style>
+                {% endif %}
+                {%  endif  %}
                 <div class="mega-menu__item">
-                  <div class="mega-menu__list">
+                  <div class="mega-menu__list mega-menu__list--{{ link.object.handle }}">
                     <a href="{{ link.url }}">{{ link.title }}</a>
                   </div>
                   {% if link.links != blank %}
@@ -119,7 +148,6 @@
     {% endif %}
   </div>
 </section>
-
 {% schema %}
 {
   "name": "Header Bottom",

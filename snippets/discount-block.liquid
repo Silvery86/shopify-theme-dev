@@ -1,0 +1,57 @@
+<div class="header__promo">
+  <span class="promo__icon">%</span>
+  <div class="promo__text">
+    <small>Only this month</small>
+    <strong>Super Sale 20%</strong>
+  </div>
+</div>
+<style>
+  .header__promo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+  min-width: 170px;
+  height: 48px;
+}
+
+.promo__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-bg-hover);
+  height: 48px;
+  width: 48px;
+  color: var(--primary-btn-bg);
+  border-radius: 50%;
+  padding: 0.4rem 0.6rem;
+  font-weight: bold;
+}
+.promo__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  min-height: 48px;
+  gap: 0px;
+}
+.promo__text small {
+  color: var(--subtitle-color);
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.promo__text strong {
+  color: var(--heading-color);
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+@media screen and (max-width: 1024px) {
+   .header__promo {
+    display: none;
+   }
+  }
+
+</style>

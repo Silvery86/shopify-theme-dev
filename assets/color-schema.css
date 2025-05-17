@@ -5,6 +5,7 @@
     --primary-bg-hover: #333D4C;
     --primary-border : #E0E5EB;
     --heading-color: #FFFFFF;
+    --subtitle-color: #CAD0D9;
     --secondary-bg:#FFFFFF;
     --secondary-bg-hover:#F5F7FA;
     --secondary-border:#EEF1F6;
@@ -16,5 +17,6 @@
     --warning-color : #FC9231;
     --discount-price-text : #9CA3AF;
     --input-border: #CAD0D9;
+    --input-place-holder: #6C727F;
 }
   
