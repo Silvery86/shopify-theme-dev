@@ -22,13 +22,17 @@
       {% for product in section.settings['products-list'] limit: 8 %}
         <div class="product-item">
           <a href="{{ product.url }}">
-            {{ product | image_url: width: 110 , height: 110 | image_tag: class: 'product-image', alt: product.title , width: 110 , height : 110 }}
+            {{
+              product
+              | image_url: width: 110, height: 110
+              | image_tag: class: 'product-image', alt: product.title, width: 110, height: 110
+            }}
           </a>
           <div class="product-info">
             <div class="product-rating">
               {% if product.metafields.custom.fake_rating %}
-                 {% render 'product-rating-products', product: product %}
-                {% endif %}
+                {% render 'product-rating-products', product: product %}
+              {% endif %}
             </div>
             <div class="product-title">{{ product.title }}</div>
             <div class="product-price">
@@ -123,7 +127,7 @@
     }
 
     .products-banner__banner img {
-        max-height: 465px;
+      max-height: 465px;
     }
 
     .products-banner__banner,
@@ -159,10 +163,12 @@
   }
 </style>
 
-
 {% schema %}
 {
   "name": "Products Grid With Banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "text",
@@ -183,7 +189,7 @@
       "type": "url",
       "id": "banner-button-url",
       "label": "Banner Button Link"
-    },   
+    },
     {
       "type": "header",
       "content": "Products Setting"

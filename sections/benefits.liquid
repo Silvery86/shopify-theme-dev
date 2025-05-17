@@ -1,17 +1,20 @@
 {{ 'benefits.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width">
-  <div class="benefits__container align-{{ section.settings.benefits_alignment }}" style="margin : {{ section.settings.benefits-margin }}px 0;">
+  <div
+    class="benefits__container align-{{ section.settings.benefits_alignment }}"
+    style="margin : {{ section.settings.benefits-margin }}px 0;"
+  >
     {% for block in section.blocks %}
       <div class="benefits__content" {{ block.shopify_attributes }}>
         <div class="benefits__icon-container">
-            {% if block.settings['benefit-icon'] != blank %}
-                {{
-                    block.settings['benefit-icon']
-                    | image_url: width: 32, height: 32
-                    | image_tag: alt: block.settings['benefit-title'], class: 'benefit-icon'
-                }}
-            {% endif %}
+          {% if block.settings['benefit-icon'] != blank %}
+            {{
+              block.settings['benefit-icon']
+              | image_url: width: 32, height: 32
+              | image_tag: alt: block.settings['benefit-title'], class: 'benefit-icon'
+            }}
+          {% endif %}
         </div>
         <div class="benefits___heading">
           <div class="benefits__title">
@@ -29,6 +32,9 @@
 {% schema %}
 {
   "name": "Benefits Section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "select",
@@ -51,10 +57,10 @@
       "default": "left"
     },
     {
-        "type": "number",
-        "id": "benefits-margin",
-        "label": "Benefits Margin",
-        "default" : 72
+      "type": "number",
+      "id": "benefits-margin",
+      "label": "Benefits Margin",
+      "default": 72
     }
   ],
   "blocks": [

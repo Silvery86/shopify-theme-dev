@@ -1,55 +1,55 @@
 <div class="page-width">
-    <div class="sale-banner__container">
-        <div class="sale-banner__discount">
-            <div class="discount__percent">{{ section.settings.sale-percent }}</div>
-            <div class="discount__content">
-                <div class="discount__type">%</div>
-                <div class="discount__off">OFF</div>
-            </div>
-        </div>
-        <div class="sale-banner__banner">
-            <div class="banner__content">
-                <div class="banner__title">
-                    {{ section.settings.banner-title }}
-                </div>
-                <div class="banner__subtitle">
-                    {{ section.settings.banner-subtitle }}
-                </div>
-            </div>
-            <div class="banner__image">
-                <img 
-                src="{{ section.settings.banner-image |  image_url: width: 420 , height : 252  }}"
-                alt="{{ section.settings.banner-title }}"
-                width="420px"
-                height="252px"
-                />
-            </div>
-        </div>
+  <div class="sale-banner__container">
+    <div class="sale-banner__discount">
+      <div class="discount__percent">{{ section.settings['sale-percent'] }}</div>
+      <div class="discount__content">
+        <div class="discount__type">%</div>
+        <div class="discount__off">OFF</div>
+      </div>
     </div>
+    <div class="sale-banner__banner">
+      <div class="banner__content">
+        <div class="banner__title">
+          {{ section.settings['banner-title'] }}
+        </div>
+        <div class="banner__subtitle">
+          {{ section.settings['banner-subtitle'] }}
+        </div>
+      </div>
+      <div class="banner__image">
+        <img
+          src="{{ section.settings.banner-image |  image_url: width: 420 , height : 252  }}"
+          alt="{{ section.settings.banner-title }}"
+          width="420px"
+          height="252px"
+        >
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
-.sale-banner__container {
+  .sale-banner__container {
     margin: 36px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 252px;
-}
+  }
 
-.sale-banner__discount {
+  .sale-banner__discount {
     width: 25%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 210px;
-    background: linear-gradient(to right, #ACCBEE, #E7F0FD);
+    background: linear-gradient(to right, #accbee, #e7f0fd);
     border-radius: 16px;
-}
+  }
 
-.sale-banner__banner {
+  .sale-banner__banner {
     width: calc(100% - 25%);
     display: flex;
     flex-direction: row;
@@ -57,11 +57,11 @@
     align-items: center;
     position: relative;
     height: 210px;
-    background: linear-gradient(to right, #ACCBEE, #E7F0FD);
+    background: linear-gradient(to right, #accbee, #e7f0fd);
     border-radius: 16px;
-}
+  }
 
-.sale-banner__discount {
+  .sale-banner__discount {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -69,33 +69,32 @@
     color: var(--primary-color);
     gap: 8px;
     padding: 24px;
-}
+  }
 
-.discount__percent {
+  .discount__percent {
     font-size: 100px;
     font-weight: 700;
-}
+  }
 
-.discount__content {
+  .discount__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-}
+  }
 
-.discount__content .discount__type {
+  .discount__content .discount__type {
     font-size: 50px;
     font-weight: 700;
     line-height: 2.5rem;
-}
+  }
 
-.discount__content .discount__off {
+  .discount__content .discount__off {
     font-size: 30px;
     font-weight: 700;
-}
+  }
 
-
-.sale-banner__banner .banner__content{
+  .sale-banner__banner .banner__content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -106,109 +105,116 @@
     position: absolute;
     left: 48px;
     z-index: 10;
-}
+  }
 
-.banner__content .banner__title {
+  .banner__content .banner__title {
     font-size: 28px;
     font-weight: 700;
-}
+  }
 
-.banner__content .banner__subtitle {
+  .banner__content .banner__subtitle {
     color: var(--secondary-text);
     font-size: 18px;
     font-weight: 500;
-}
-.sale-banner__banner .banner__image {
+  }
+
+  .sale-banner__banner .banner__image {
     position: absolute;
     bottom: -42px;
     right: -40px;
     z-index: 5;
-}
-/* Responsive */
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
     .sale-banner__container {
-        flex-direction: column;
-        background: linear-gradient(to right, #ACCBEE, #E7F0FD);
-        height: 650px;
-        gap: 28px;
-        border-radius: 16px;
+      flex-direction: column;
+      background: linear-gradient(to right, #accbee, #e7f0fd);
+      height: 650px;
+      gap: 28px;
+      border-radius: 16px;
     }
+
     .sale-banner__discount,
     .sale-banner__banner {
-        background: none;
+      background: none;
     }
 
     .sale-banner__discount {
-        height: 30%;
+      height: 30%;
     }
 
     .sale-banner__banner {
-        flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 500px;
-  height: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-    }
-    .sale-banner__banner .banner__content {
-        text-align: center;
-  padding: 10px 20px;
-  width: 100%; 
-  margin-bottom: 20px;
-  top: 0;
-  left: auto;
-  justify-content: center;
-  align-items: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-   .sale-banner__banner .banner__image {
-       padding: 10px;
-  border-radius: 6px;
-  bottom: 0;
-  right: auto;
+    .sale-banner__banner .banner__content {
+      text-align: center;
+      padding: 10px 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      top: 0;
+      left: auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sale-banner__banner .banner__image {
+      padding: 10px;
+      border-radius: 6px;
+      bottom: 0;
+      right: auto;
     }
   }
 </style>
 
-{%  schema  %} 
+{% schema %}
 {
-    "name": "Sale Banner",
-    "settings": [
-        {
-            "type": "header",
-            "content": "Sale Banner Setting"
-        },
-        {
-            "type": "number",
-            "id": "sale-percent",
-            "label": "Sale Percent",
-            "default":20
-        },
-        {
-            "type": "text",
-            "id": "banner-title",
-            "label": "Banner Title",
-            "default" : "Seasonal weekly sale 2025"
-        },
-        {
-            "type": "richtext",
-            "id": "banner-subtitle",
-            "label": "Banner Subtitle",
-            "default": "<p>Use code  Sale 2025  to get best offer</p>"
-        },
-        {
-            "type": "image_picker",
-            "id": "banner-image",
-            "label": "Banner Image"
-        }
-    ],
-    "presets": [
-        {
-            "name": "Sale Banner"
-        }
-    ]
+  "name": "Sale Banner",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sale Banner Setting"
+    },
+    {
+      "type": "number",
+      "id": "sale-percent",
+      "label": "Sale Percent",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "banner-title",
+      "label": "Banner Title",
+      "default": "Seasonal weekly sale 2025"
+    },
+    {
+      "type": "richtext",
+      "id": "banner-subtitle",
+      "label": "Banner Subtitle",
+      "default": "<p>Use code Sale 2025 to get best offer</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner-image",
+      "label": "Banner Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Banner"
+    }
+  ]
 }
 {% endschema %}
