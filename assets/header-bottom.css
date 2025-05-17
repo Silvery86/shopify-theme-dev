@@ -32,7 +32,22 @@
     justify-content: center;
     align-items: center;
 }
+.header-bottom__options .disclosure .disclosure__button  {    
+    background-color: var(--primary-bg);
+    color: var(--heading-color);
+}
 
+.header-bottom__options .disclosure .country-selector{
+    position: absolute;
+    top: 48px;
+    height: max-content;
+    width: max-content;
+    background-color: var(--primary-bg);
+    color: var(--heading-color);
+}
+.header-bottom__options .disclosure .country-selector .link--text {
+    color: var(--heading-color);
+}
 .header-bottom__language,
 .header-bottom__currency {
     padding: 0px 8px;

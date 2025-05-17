@@ -21,8 +21,29 @@
               {% endif %}
             </div>
             <div class="header-bottom__options">
-              <div class="header-bottom__language">English</div>
-              <div class="header-bottom__currency">USD</div>
+              <div class="desktop-localization-wrapper">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {% endif %}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
             </div>
           </div>
         </div>
@@ -153,7 +174,7 @@
   "tag": "header",
   "disabled_on": {
     "groups": ["footer", "aside"],
-    "templates": ["product", "collection","index"]
+    "templates": ["product", "collection", "index"]
   },
   "settings": [
     {
@@ -214,6 +235,18 @@
       "id": "gradient_color_2",
       "label": "Banner Gradient Color 2",
       "default": "#E7F0FD"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "Enable country selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "Enable language selector"
     }
   ],
   "presets": [
