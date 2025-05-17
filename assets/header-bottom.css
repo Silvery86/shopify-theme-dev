@@ -70,12 +70,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    gap: 12px;
+    margin-left: 24px;
 }
-
-.nav__item {
-    padding: 12px 20px;
+.nav__item a:hover {
+    color: var(--primary-btn-bg);
 }
-
 .nav__item a {
     text-decoration: none;
     color: var(--heading-color);
