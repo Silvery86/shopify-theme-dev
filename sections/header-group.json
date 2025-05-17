@@ -41,7 +41,7 @@
       "settings": {
         "logo_position": "top-left",
         "mobile_logo_position": "left",
-        "menu": "",
+        "menu": "categories",
         "menu_type_desktop": "mega",
         "sticky_header_type": "none",
         "show_line_separator": true,
@@ -65,8 +65,8 @@
         "header-bottom-menu": "header-bottom-menu",
         "banner-button-url": "/",
         "banner-button-text": "Shop Now",
-        "gradient_color_1": "#ad91d1",
-        "gradient_color_2": "#E7F0FD"
+        "gradient_color_1": "#e7f0fd",
+        "gradient_color_2": "#e7f0fd"
       }
     }
   },
