@@ -4,7 +4,7 @@
       {% for block in section.blocks %}
         <div
           class="card-draw__item"
-          style="background-image: url({{ block.settings.banner_image | img_url: 'original'  }});"
+          style="background-image: url({{ block.settings.banner_image | image_url: width: 2000 }});"
           {{ block.shopify_attributes }}
         >
           <div class="card-draw__content">

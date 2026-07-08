@@ -1,3 +1,5 @@
+{{ 'product-fake-rating.css' | asset_url | stylesheet_tag }}
+
 <div class="page-width">
   <div class="product-banner__title">
     {{ section.settings['products-banner-heading'] }}
@@ -6,10 +8,10 @@
     <div class="products-banner__banner">
       {% if section.settings['banner-image'] %}
         <div class="products-banner__banner">
-          <a href="{{ section.settings.banner-button-url }}">
+          <a href="{{ section.settings['banner-button-url'] }}">
             <img
-              src="{{ section.settings.banner-image | image_url }}"
-              alt="{{ section.settings.banner-button-text | escape }}"
+              src="{{ section.settings['banner-image'] | image_url }}"
+              alt="{{ section.settings['products-banner-heading'] | escape }}"
               width="416px"
               height="535px"
               class="banner-image"
@@ -30,9 +32,7 @@
           </a>
           <div class="product-info">
             <div class="product-rating">
-              {% if product.metafields.custom.fake_rating %}
-                {% render 'product-rating-products', product: product %}
-              {% endif %}
+              {% render 'product-rating', product: product %}
             </div>
             <div class="product-title">{{ product.title }}</div>
             <div class="product-price">

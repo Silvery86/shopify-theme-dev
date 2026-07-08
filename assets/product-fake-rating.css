@@ -1,0 +1,17 @@
+.products-rating,
+.product-rating {
+  display: flex;
+  align-items: center;
+}
+
+.products-rating .star {
+  font-size: 12px;
+  color: var(--warning-color);
+  margin-right: 4px;
+}
+
+.product-rating .star {
+  font-size: 24px;
+  color: var(--warning-color);
+  margin-right: 4px;
+}

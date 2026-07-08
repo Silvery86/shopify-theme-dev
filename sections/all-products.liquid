@@ -1,37 +1,41 @@
 {{ 'all-products.css' |  asset_url |  stylesheet_tag }}
 
-{% assign remaining_products = '' %}
 {% assign sorted_products = collections.all.products %}
 
+{%- comment -%}
+  Only sort keys that map to real Product properties work here. Best-selling /
+  sale-percent / sold-number are not array-sortable in Liquid, so they are not
+  offered as options (they would silently be no-ops).
+{%- endcomment -%}
 {%- case section.settings.product_sort_by -%}
-  {%- when 'best_selling' -%}
-    {%- assign sorted_products = sorted_products | sort: 'sales' %}  {# Note: Sales data needs to be available or tracked in metafields #}
   {%- when 'newest' -%}
-    {%- assign sorted_products = sorted_products | sort: 'created_at' %}  
-  {%- when 'sale_percent' -%}
-    {%- assign sorted_products = sorted_products | sort: 'on_sale' %}  {# Assumes products have an 'on_sale' metafield or indicator #}
-  {%- when 'sold_number' -%}
-    {%- assign sorted_products = sorted_products | sort: 'sold_number' %}  {# Requires tracking number of sold items #}
+    {%- assign sorted_products = sorted_products | sort: 'created_at' | reverse -%}
   {%- when 'price_low_to_high' -%}
-    {%- assign sorted_products = sorted_products | sort: 'price' %}  
+    {%- assign sorted_products = sorted_products | sort: 'price' -%}
   {%- when 'price_high_to_low' -%}
-    {%- assign sorted_products = sorted_products | sort: 'price' | reverse %}
+    {%- assign sorted_products = sorted_products | sort: 'price' | reverse -%}
 {%- endcase -%}
 
-
-{% for product in sorted_products offset: section.settings.products_per_row %}
-  {% assign remaining_products = remaining_products | append: product.handle %}
-  {% unless forloop.last %}
-    {% assign remaining_products = remaining_products | append: ',' %}
-  {% endunless %}
-{% endfor %}
+{%- comment -%}
+  Build the comma-separated handle list of products that come AFTER the first
+  row (which is rendered server-side below); the JS load-more button fetches
+  these on demand.
+{%- endcomment -%}
+{%- assign remaining_products = '' -%}
+{%- for product in sorted_products offset: section.settings.products_per_row -%}
+  {%- if forloop.first -%}
+    {%- assign remaining_products = product.handle -%}
+  {%- else -%}
+    {%- assign remaining_products = remaining_products | append: ',' | append: product.handle -%}
+  {%- endif -%}
+{%- endfor -%}
 
 
 
 <div class="page-width" id="{{ section.id }}">
   <div style="text-align: {{ section.settings.text_alignment }};">
-    <h2>{{ section.settings.all-product-header }}</h2>
-    <p>{{ section.settings.all-product-subtitle }}</p>
+    <h2>{{ section.settings['all-product-header'] }}</h2>
+    <p>{{ section.settings['all-product-subtitle'] }}</p>
   </div> 
   <all-products
     data-remaining-products="{{ remaining_products }}"
@@ -108,20 +112,8 @@
   "label": "Sort Products By",
   "options": [
     {
-      "value": "best_selling",
-      "label": "Best Selling"
-    },
-    {
       "value": "newest",
       "label": "Newest"
-    },
-    {
-      "value": "sale_percent",
-      "label": "Sale Percent"
-    },
-    {
-      "value": "sold_number",
-      "label": "Sold Number"
     },
     {
       "value": "price_low_to_high",

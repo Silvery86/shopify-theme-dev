@@ -66,7 +66,7 @@
               {% if article.image %}
                 <a href="{{ article.url }}">
                   <img
-                    src="{{ article.image | img_url: 'medium' }}"
+                    src="{{ article.image | image_url: width: 280 }}"
                     alt="{{ article.title }}"
                     width="140px"
                     height="86px"

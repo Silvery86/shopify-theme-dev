@@ -18,8 +18,8 @@
       </div>
       <div class="banner__image">
         <img
-          src="{{ section.settings.banner-image |  image_url: width: 420 , height : 252  }}"
-          alt="{{ section.settings.banner-title }}"
+          src="{{ section.settings['banner-image'] | image_url: width: 420, height: 252 }}"
+          alt="{{ section.settings['banner-title'] }}"
           width="420px"
           height="252px"
         >

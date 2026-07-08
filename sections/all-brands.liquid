@@ -1,10 +1,10 @@
 <div class="page-width">
   <div class="all-brands__container">
     {% for block in section.blocks %}
-        {%  if block.settings.brand-logo %} 
+        {% if block.settings['brand-logo'] %}
       <div class="brand__container">
         <img
-          src="{{ block.settings.brand-logo |  image_url }}"
+          src="{{ block.settings['brand-logo'] | image_url }}"
           alt="Brand Logo"
           width="164px"
           height="80px"
@@ -12,11 +12,12 @@
       </div>
        {% endif %}
     {% endfor %}
-     {%  if section.settings.all-brands-logo %} 
-    <a href="{{ section.settings.all-brand-url }}" class="all-brand__url">
-        
+     {% if section.settings['all-brands-logo'] %}
+    <a href="{{ section.settings['all-brand-url'] }}" class="all-brand__url">
+
       <div class="brand__container">
-        <img src="{{ section.settings.all-brands-logo |  image_url  }}"
+        <img src="{{ section.settings['all-brands-logo'] | image_url }}"
+        alt="All brands"
         width="164"
         height="80"/>       
       </div>

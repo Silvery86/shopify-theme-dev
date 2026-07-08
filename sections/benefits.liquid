@@ -3,7 +3,7 @@
 <div class="page-width">
   <div
     class="benefits__container align-{{ section.settings.benefits_alignment }}"
-    style="margin : {{ section.settings.benefits-margin }}px 0;"
+    style="margin : {{ section.settings['benefits-margin'] }}px 0;"
   >
     {% for block in section.blocks %}
       <div class="benefits__content" {{ block.shopify_attributes }}>

@@ -1,36 +1,34 @@
+{% comment %}
+  Renders a star rating from product.metafields.custom.fake_rating.
 
-{% if product.metafields.custom.fake_rating %}
-  {% assign rating = product.metafields.custom.fake_rating.value | default: 0 %}
-  {% assign full_stars = rating | floor %}
-  {% assign half_star = rating | minus: full_stars | times: 10 | round %}
-  {% assign empty_stars = 5 | minus: full_stars %}
-  {% if half_star >= 5 %}
-    {% assign empty_stars = empty_stars | minus: 1 %}
-  {% endif %}
+  Accepts:
+    - product: {Object} Product object (required)
+    - size:    {String} 'sm' (12px, default) or 'lg' (24px)
 
-  <div class="product-rating">
-    {% for i in (1..full_stars) %}
-      <span class="star">★</span>
-    {% endfor %}
-    {% if half_star >= 5 %}
-      <span class="star">⯨</span>
-    {% endif %}
-    {% for i in (1..empty_stars) %}
-      <span class="star">☆</span>
-    {% endfor %}
+  Requires 'product-fake-rating.css' to be loaded once by the parent section.
+  Renders nothing when the product has no fake_rating metafield.
+
+  Usage:
+    {% render 'product-rating', product: product %}
+    {% render 'product-rating', product: product, size: 'lg' %}
+{% endcomment %}
+{%- if product.metafields.custom.fake_rating != blank -%}
+  {%- liquid
+    assign rating = product.metafields.custom.fake_rating.value | default: 0
+    assign full_stars = rating | floor
+    assign half_star = rating | minus: full_stars | times: 10 | round
+    assign empty_stars = 5 | minus: full_stars
+    if half_star >= 5
+      assign empty_stars = empty_stars | minus: 1
+    endif
+    assign rating_class = 'products-rating'
+    if size == 'lg'
+      assign rating_class = 'product-rating'
+    endif
+  -%}
+  <div class="{{ rating_class }}">
+    {%- for i in (1..full_stars) -%}<span class="star">★</span>{%- endfor -%}
+    {%- if half_star >= 5 -%}<span class="star">⯨</span>{%- endif -%}
+    {%- for i in (1..empty_stars) -%}<span class="star">☆</span>{%- endfor -%}
   </div>
-
-  <style>
-    .product-rating {
-      display: flex;
-      align-items: center;
-    }
-    .product-rating .star {
-      font-size: 24px;
-      color: var(--warning-color);
-      margin-right: 4px;
-    }
-  </style>
-{% else %}
-  <div>No rating available.</div>
-{% endif %}
+{%- endif -%}

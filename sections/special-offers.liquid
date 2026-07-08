@@ -1,4 +1,6 @@
 {{ 'special-offers.css' | asset_url | stylesheet_tag }}
+{{ 'custom-product-card.css' | asset_url | stylesheet_tag }}
+{{ 'product-fake-rating.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width">
   <div class="special-offers__container">
@@ -9,9 +11,9 @@
         </div>
         <div
   class="heading__count-down"
-  data-hours="{{ section.settings.count-down-hours }}"
-  data-minutes="{{ section.settings.count-down-minutes }}"
-  data-seconds="{{ section.settings.count-down-seconds | default: 0 }}"
+  data-hours="{{ section.settings['count-down-hours'] }}"
+  data-minutes="{{ section.settings['count-down-minutes'] }}"
+  data-seconds="{{ section.settings['count-down-seconds'] | default: 0 }}"
 >
   <span><strong class="countdown__hours">00</strong>h</span>
   <span><strong class="countdown__minutes">00</strong>m</span>
@@ -20,12 +22,12 @@
 
       </div>
       <div class="heading__view-all">
-        <a href="{{ section.settings.special-offers-link }}">{{ section.settings['special-offers-view-all'] }}</a>
+        <a href="{{ section.settings['special-offers-link'] }}">{{ section.settings['special-offers-view-all'] }}</a>
       </div>
     </div>
     <div class="swiper special-offers__slider"
-    data-desktop="{{ section.settings.products-per-slide-desktop }}"
-     data-mobile="{{ section.settings.products-per-slide-mobile }}">
+    data-desktop="{{ section.settings['products-per-slide-desktop'] }}"
+     data-mobile="{{ section.settings['products-per-slide-mobile'] }}">
       <div class="swiper-wrapper">
         {% for product in section.settings['special-offers-list'] limit: section.settings['products-slider-total'] %}
           <div class="swiper-slide">
@@ -114,12 +116,6 @@
     },
     {
       "type": "number",
-      "id": "count-down-days",
-      "label": "Count down days",
-      "default": 12
-    },
-    {
-      "type": "number",
       "id": "count-down-hours",
       "label": "Count down hours",
       "default": 12
@@ -143,8 +139,11 @@
       "default": "View all"
     },
     {
-      "type": "number",
+      "type": "range",
       "id": "products-slider-total",
+      "min": 4,
+      "max": 24,
+      "step": 1,
       "label": "Number of total products in slider",
       "default": 12
     },

@@ -1,6 +1,7 @@
 {% comment %}
   Only show on product pages
 {% endcomment %}
+{{ 'product-fake-rating.css' | asset_url | stylesheet_tag }}
 {% if template.name == 'product' %}
   <div class="page-width">
     <div class="product-options__container">
@@ -14,9 +15,7 @@
           <a href="#reviews" class="product-options__tab">Reviews</a>
         </div>
         <div class="product-options__info-review">
-          {% if product.metafields.custom.fake_rating %}
-            {% render 'product-rating-products', product: product %}
-          {% endif %}
+          {% render 'product-rating', product: product %}
         </div>
       </div>
      </div>

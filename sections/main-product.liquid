@@ -663,7 +663,8 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
               {% when 'product_rating' %}
-                {% render 'product-rating', block: block %}
+                {{ 'product-fake-rating.css' | asset_url | stylesheet_tag }}
+                {% render 'product-rating', product: product, size: 'lg' %}
               {% when 'upsell-bundles' %}
                   {% render 'upsell-bundles', block: block, related_type: block.settings.related_type %}
             {%- endcase -%}

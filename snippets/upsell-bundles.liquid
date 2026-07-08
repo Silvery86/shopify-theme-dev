@@ -12,9 +12,9 @@
 
       {% if related_product.featured_image %}
         <a href="{{ related_product.url }}">
-          <img src="{{ related_product.featured_image | img_url: 'medium' }}" 
+          <img src="{{ related_product.featured_image | image_url: width: 150, height: 150 }}"
                alt="{{ related_product.title | escape }}"
-               width="150" height="150">
+               width="150" height="150" loading="lazy">
         </a>
       {% endif %}
 
@@ -63,36 +63,37 @@
       outputContainer.appendChild(card.cloneNode(true));
     });
 
+    const addToCart = (items, trigger) => {
+      if (trigger) trigger.setAttribute('disabled', 'true');
+      const add = window.customAddToCart
+        ? window.customAddToCart(items)
+        : fetch(`${(window.routes && window.routes.cart_add_url) || '/cart/add'}.js`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items }),
+          }).then((res) => res.json());
+      Promise.resolve(add)
+        .catch((error) => console.error('Upsell bundles: add to cart failed', error))
+        .finally(() => {
+          if (trigger) trigger.removeAttribute('disabled');
+        });
+    };
+
     // Single product add-to-cart
     outputContainer.querySelectorAll('.product-card__button').forEach(button => {
       button.addEventListener('click', () => {
-        const variantId = button.dataset.variantId;
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: variantId, quantity: 1 })
-        })
-          .then(res => res.json())
-          .then(() => location.reload())
-          .catch(() => console.log('Failed to add product to cart.'));
+        addToCart([{ id: Number(button.dataset.variantId), quantity: 1 }], button);
       });
     });
 
     // Add all products to cart
-    document.getElementById('add-all-related-to-cart').addEventListener('click', () => {
+    const addAllButton = document.getElementById('add-all-related-to-cart');
+    addAllButton.addEventListener('click', () => {
       const items = Array.from(outputContainer.querySelectorAll('.product-card')).map(card => ({
-        id: card.dataset.productId,
+        id: Number(card.dataset.productId),
         quantity: 1
       }));
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items })
-      })
-        .then(res => res.json())
-        .then(() => location.reload())
-        .catch(() => console.log('Failed to add products to cart.'));
+      addToCart(items, addAllButton);
     });
 
     hiddenContainer.remove();
